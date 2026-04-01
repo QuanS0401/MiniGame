@@ -166,8 +166,8 @@ const LEVELS = [
     {
         group: "Super Hard",
         name: "Super Hard - Câu 5",
-        target: 37,
-        numbers: [9, 5, 4, 3],
+        target: 36,
+        numbers: [3, 6, 6, 6],
         hint: "36 là mốc rất gần."
     }
 ];
@@ -597,7 +597,7 @@ function showIntro() {
             <h1>Chào mừng đến vòng 3</h1>
             <p>
                 Đây là vòng cuối trong tổng 3 vòng. Nhiệm vụ của người chơi là dùng đúng 4 số đã cho,
-                kết hợp các phép toán +, -, ×, ÷, ngoặc để tạo ra số mục tiêu.
+                kết hợp các phép toán +, -, ×, ÷, ngoặc để tạo ra số N.
             </p>
             <ul class="intro-rules">
                 <li>Mỗi câu phải dùng hết tất cả các số.</li>
