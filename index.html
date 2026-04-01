@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24 Game - Vòng 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="introOverlay">
+        <div id="introText"></div>
+    </div>
+    
+    <div class="container">
+        <header class="site-header">
+            <div class="brand-wrap">
+                <img
+                    src="LOGO STEM official.png"
+                    alt="Logo câu lạc bộ"
+                    class="club-logo"
+                    onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
+                >
+                <div class="logo-fallback" id="logoFallback">CLB</div>
+            </div>
+            <div class="header-text">
+                <p class="badge">Vòng 3 / 3</p>
+                <h1>24 Game - STEM Challenge</h1>
+                <p class="subtitle">Dùng đúng 4 số và các phép toán để tạo ra số mục tiêu.</p>
+            </div>
+        </header>
+
+        <main class="game-box">
+            <section class="level-section">
+                <div>
+                    <p class="section-label">Mức độ hiện tại</p>
+                    <h2 id="levelName">Easy 1</h2>
+                </div>
+                <div class="level-chip" id="levelChip">LEVEL: EASY 1</div>
+            </section>
+
+            <section class="progress-section">
+                <div class="progress-top">
+                    <span id="difficultyText">Easy</span>
+                    <span id="progressText">Câu 1 / 20</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill"></div>
+                </div>
+            </section>
+
+            <section class="target-section">
+                <div id="target"></div>
+            </section>
+
+            <section class="expression-section">
+                <div id="expressionDisplay" class="expression-display"></div>
+            </section>
+
+            <section class="numbers-section">
+                <div id="numbers" class="numbers-display"></div>
+            </section>
+
+            <section class="operators-section">
+                <div class="operators-display">
+                    <button class="operator-card" data-value="+">+</button>
+                    <button class="operator-card" data-value="-">-</button>
+                    <button class="operator-card" data-value="*">×</button>
+                    <button class="operator-card" data-value="/">÷</button>
+                    <button class="operator-card" data-value="(">(</button>
+                    <button class="operator-card" data-value=")">)</button>
+                </div>
+            </section>
+
+            <section class="action-section">
+                <button id="deleteBtn">Xóa</button>
+                <button id="clearBtn">Xóa hết</button>
+                <button id="hintBtn">Hint</button>
+                <button id="checkBtn">Nộp bài</button>
+            </section>
+
+            <section class="result-section">
+                <div id="result"></div>
+            </section>
+        </main>
+    </div>
+
+    <div class="level-intro-overlay" id="levelIntroOverlay">
+        <div class="level-intro-badge" id="levelIntroBadge">LEVEL: EASY 1</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
