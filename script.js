@@ -93,7 +93,7 @@ const LEVELS = [
         group: "Medium",
         name: "Medium - Câu 5",
         target: 40,
-        numbers: [10, 10, 10, 10],
+        numbers: [5, 5, 5, 10],
         hint: "Có thể không cần ngoặc."
     },
 
@@ -101,36 +101,36 @@ const LEVELS = [
     {
         group: "Hard",
         name: "Hard - Câu 1",
-        target: 19,
-        numbers: [3, 5, 7, 9],
+        target: 9,
+        numbers: [4, 3, 3, 4],
         hint: "Hãy thử tạo 21 rồi điều chỉnh."
     },
     {
         group: "Hard",
         name: "Hard - Câu 2",
-        target: 21,
-        numbers: [6, 7, 3, 1],
+        target: 20,
+        numbers: [3, 8, 4, 3],
         hint: "Có thể tạo đúng 21 khá nhanh."
     },
     {
         group: "Hard",
         name: "Hard - Câu 3",
-        target: 25,
-        numbers: [5, 5, 5, 1],
+        target: 33,
+        numbers: [3, 6, 6, 6],
         hint: "Có thể tạo bình phương."
     },
     {
         group: "Hard",
         name: "Hard - Câu 4",
-        target: 14,
-        numbers: [8, 2, 3, 1],
+        target: 36,
+        numbers: [3, 6, 3, 6],
         hint: "Thử dùng toàn phép cộng trước."
     },
     {
         group: "Hard",
         name: "Hard - Câu 5",
-        target: 27,
-        numbers: [9, 3, 3, 1],
+        target: 3636,
+        numbers: [3, 10, 6, 1],
         hint: "Số 9 và 3 rất đáng chú ý."
     },
 
