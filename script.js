@@ -43,21 +43,21 @@ const LEVELS = [
         name: "Easy - Câu 3",
         target: 18,
         numbers: [9, 3, 3, 3],
-        hint: "Số 9 khá quan trọng."
+        hint: "Thử cộng cả 4 số."
     },
     {
         group: "Easy",
         name: "Easy - Câu 4",
         target: 16,
         numbers: [8, 4, 2, 2],
-        hint: "Có thể không cần nhân."
+        hint: "thử cộng cả 4 số."
     },
     {
         group: "Easy",
         name: "Easy - Câu 5",
         target: 12,
         numbers: [3, 3, 3, 3],
-        hint: "Có thể dùng phép nhân rồi cộng."
+        hint: "Thử cộng cả 4 số."
     },
 
     // MEDIUM
@@ -73,7 +73,7 @@ const LEVELS = [
         name: "Medium - Câu 2",
         target: 30,
         numbers: [5, 5, 5, 5],
-        hint: "Có thể dùng nhân rồi cộng."
+        hint: "Có thể ghép 2 số lại rồi trừ."
     },
     {
         group: "Medium",
@@ -87,88 +87,88 @@ const LEVELS = [
         name: "Medium - Câu 4",
         target: 15,
         numbers: [7, 2, 3, 1],
-        hint: "Có thể tạo 14 rồi cộng thêm."
+        hint: "tạo ra số 5 trước có thể hữu ích."
     },
     {
         group: "Medium",
         name: "Medium - Câu 5",
         target: 40,
         numbers: [5, 5, 5, 10],
-        hint: "Có thể không cần ngoặc."
+        hint: "thử tạo ra 50 trước"
     },
 
     // HARD
     {
         group: "Hard",
         name: "Hard - Câu 1",
-        target: 9,
-        numbers: [4, 3, 3, 4],
-        hint: "Hãy thử tạo 21 rồi điều chỉnh."
+        target: 25,
+        numbers: [2, 2, 5, 5], // 2*5*(5/2)
+        hint: "cố gắng triệt tiêu số 2"
     },
     {
         group: "Hard",
         name: "Hard - Câu 2",
-        target: 20,
-        numbers: [3, 8, 4, 3],
-        hint: "Có thể tạo đúng 21 khá nhanh."
+        target: 2,
+        numbers: [4, 5, 6, 3], // 6+4-3-5
+        hint: "suy nghĩ 1 cách đơn giản về phép tính cộng trừ"
     },
     {
         group: "Hard",
         name: "Hard - Câu 3",
-        target: 33,
-        numbers: [3, 6, 6, 6],
-        hint: "Có thể tạo bình phương."
+        target: 9,
+        numbers: [9, 2, 6, 3], // 9 * 6 / 3 / 2
+        hint: "chỉ là phép tính đơn giản giữa nhân và chia"
     },
     {
         group: "Hard",
         name: "Hard - Câu 4",
-        target: 36,
-        numbers: [3, 6, 3, 6],
-        hint: "Thử dùng toàn phép cộng trước."
+        target: 13,
+        numbers: [9, 4, 3, 3], // 3 * (4 + 3/9)
+        hint: "tạo ra 1 số có thể triệt tiêu số 3"
     },
     {
         group: "Hard",
         name: "Hard - Câu 5",
-        target: 3636,
-        numbers: [3, 10, 6, 1],
-        hint: "Số 9 và 3 rất đáng chú ý."
+        target: 15,
+        numbers: [3, 6, 2, 2], // 2 *(6 + 3/2)
+        hint: "sủ dụng phép cộng để tạo 1 phân số có thể triệt tiêu số 2"
     },
 
     // SUPER HARD
     {
         group: "Super Hard",
         name: "Super Hard - Câu 1",
-        target: 17,
-        numbers: [2, 3, 7, 9],
-        hint: "Thử tạo 14 rồi cộng thêm."
+        target: 9,
+        numbers: [4, 3, 3, 4], // 4 * (3 - 3/4)
+        hint: "hãy tạo ra 1 phân số với 3 và 4"
     },
     {
         group: "Super Hard",
         name: "Super Hard - Câu 2",
-        target: 23,
-        numbers: [4, 5, 6, 3],
-        hint: "Tạo 18 trước có thể hữu ích."
+        target: 36,
+        numbers: [3, 8, 4, 3], // (8-4) * (3*3)
+        hint: "phép cộng hoặc phép trừ có thể kết hợp để tạo ra 1 số hữu ích khác"
     },
     {
         group: "Super Hard",
         name: "Super Hard - Câu 3",
-        target: 29,
-        numbers: [7, 5, 3, 2],
-        hint: "Tạo 35 rồi điều chỉnh."
+        target: 33,
+        numbers: [3, 6, 6, 6], // 6 * (6 - 3/6)
+        hint: "hãy thử tạo ra 1 phân số có thể triệt tiêu 6"
     },
     {
         group: "Super Hard",
         name: "Super Hard - Câu 4",
-        target: 31,
-        numbers: [8, 7, 4, 1],
-        hint: "32 là một mốc gần."
+        target: 36,
+        numbers: [3, 6, 3, 6], // 6 * (6 * 3/3)
+        hint: "hãy thử tạo ra 1 số khác bằng phép chia"
     },
     {
         group: "Super Hard",
         name: "Super Hard - Câu 5",
-        target: 36,
-        numbers: [3, 6, 6, 6],
-        hint: "36 là mốc rất gần."
+        target: 3636,
+        numbers: [3, 10, 6, 1], // 36 * 101
+        hint: "thử ghép 4 số thành 2 số khác nhau rồi nhân với nhau"
     }
 ];
 
@@ -202,7 +202,7 @@ function isFirstQuestionOfGroup(index) {
 }
 
 function getLevelBadgeText(level, index = currentLevelIndex) {
-    return `LEVEL: ${level.group.toUpperCase()} ${getQuestionNumberInGroup(index)}`;
+    return `LEVEL: ${level.group.toUpperCase()}`;
 }
 
 function updateProgressUI() {
@@ -604,6 +604,7 @@ function showIntro() {
                 <li>Không được dùng thêm số ngoài đề bài.</li>
                 <li>Biểu thức phải đúng cấu trúc và không được chia cho 0.</li>
                 <li>Có tổng cộng 20 câu: Easy, Medium, Hard, Super Hard, mỗi mức 5 câu.</li>
+                <li>Không được dùng máy tính.</li>
             </ul>
             <button id="startGameBtn" type="button">Bắt đầu vòng 3</button>
         </div>
