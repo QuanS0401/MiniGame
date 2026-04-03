@@ -101,9 +101,9 @@ const LEVELS = [
     {
         group: "Hard",
         name: "Hard - Câu 1",
-        target: 25,
-        numbers: [2, 2, 5, 5], // 2*5*(5/2)
-        hint: "cố gắng triệt tiêu số 2"
+        target: 20,
+        numbers: [2, 2, 5, 5], // 5*2 + 5*2
+        hint: "phép nhân cơ bản"
     },
     {
         group: "Hard",
@@ -122,16 +122,16 @@ const LEVELS = [
     {
         group: "Hard",
         name: "Hard - Câu 4",
-        target: 13,
-        numbers: [9, 4, 3, 3], // 3 * (4 + 3/9)
-        hint: "tạo ra 1 số có thể triệt tiêu số 3"
+        target: 5,
+        numbers: [6, 4, 3, 3], // 4 * (3/6) + 3
+        hint: "tạo ra số 2 trước có thể hữu ích"
     },
     {
         group: "Hard",
         name: "Hard - Câu 5",
-        target: 15,
-        numbers: [3, 6, 2, 2], // 2 *(6 + 3/2)
-        hint: "sủ dụng phép cộng để tạo 1 phân số có thể triệt tiêu số 2"
+        target: 6,
+        numbers: [3, 6, 2, 2], // (2 / (3 / 6)) + 2
+        hint: "tạo ra số 4 trước có thể hữu ích"
     },
 
     // SUPER HARD
