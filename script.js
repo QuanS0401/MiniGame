@@ -64,9 +64,9 @@ const LEVELS = [
     {
         group: "Medium",
         name: "Medium - Câu 1",
-        target: 24,
-        numbers: [10, 10, 4, 4],
-        hint: "Thử tạo một số lớn rồi trừ đi."
+        target: 10,
+        numbers: [2, 2, 5, 5],
+        hint: "phép nhân cơ bản"
     },
     {
         group: "Medium",
@@ -101,9 +101,9 @@ const LEVELS = [
     {
         group: "Hard",
         name: "Hard - Câu 1",
-        target: 20,
-        numbers: [2, 2, 5, 5], // 5*2 + 5*2
-        hint: "phép nhân cơ bản"
+        target: 24,
+        numbers: [10, 10, 4, 4], // (10 * 10 - 4) / 4
+        hint: "tạo ra số lớn trước rồi trừ đi"
     },
     {
         group: "Hard",
