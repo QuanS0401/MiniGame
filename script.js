@@ -64,7 +64,7 @@ const LEVELS = [
     {
         group: "Medium",
         name: "Medium - Câu 1",
-        target: 10,
+        target: 20,
         numbers: [2, 2, 5, 5],
         hint: "phép nhân cơ bản"
     },
