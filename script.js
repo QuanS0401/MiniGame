@@ -593,8 +593,8 @@ function showIntro() {
 
     introText.innerHTML = `
         <div class="intro-card">
-            <p class="intro-tag">MINI GAME - VÒNG 3</p>
-            <h1>Chào mừng đến vòng 3</h1>
+            <p class="intro-tag">MINI GAME - Quick Cal</p>
+            <h1>Chào mừng đến Game 3</h1>
             <p>
                 Đây là vòng cuối trong tổng 3 vòng. Nhiệm vụ của người chơi là dùng đúng 4 số đã cho,
                 kết hợp các phép toán +, -, ×, ÷, ngoặc để tạo ra số N.
