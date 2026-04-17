@@ -477,13 +477,13 @@ function loadLevel(options = {}) {
 }
 
 function showFinalVictory() {
-    showMessage("🔥 Chúc mừng! Bạn đã hoàn thành toàn bộ Vòng 3! 🔥", "success");
+    showMessage("🔥 Chúc mừng! Bạn đã hoàn thành toàn bộ Game 3! 🔥", "success");
 
     const victoryOverlay = document.createElement("div");
     victoryOverlay.className = "final-victory-overlay";
     victoryOverlay.innerHTML = `
         <div class="final-victory-card">
-            <h2>🎉 PHÁ ĐẢO VÒNG 3 🎉</h2>
+            <h2>🎉 PHÁ ĐẢO GAME 3 🎉</h2>
             <p>Bạn đã hoàn thành tất cả 20 câu của mini game.</p>
             <button id="restartGameBtn" type="button">Chơi lại</button>
         </div>
@@ -596,7 +596,7 @@ function showIntro() {
             <p class="intro-tag">MINI GAME - Quick Cal</p>
             <h1>Chào mừng đến Game 3</h1>
             <p>
-                Đây là vòng cuối trong tổng 3 vòng. Nhiệm vụ của người chơi là dùng đúng 4 số đã cho,
+                Đây là Game cuối trong tổng 3 Game. Nhiệm vụ của người chơi là dùng đúng 4 số đã cho,
                 kết hợp các phép toán +, -, ×, ÷, ngoặc để tạo ra số N.
             </p>
             <ul class="intro-rules">
