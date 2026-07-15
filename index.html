@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Mathrix - Quick Cal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="brand-container">
+            <img src="LOGO STEM official.png" alt="Logo CLB STEM" class="club-logo">
+        </div>
+        <div class="header-text">
+            <div class="club-slogan">CLB STEM THPT Thủ Đức</div>
+            <h1>STEM Mathrix</h1>
+            <p>Thử thách tư duy logic toán học với 4 số</p>
+        </div>
+    </header>
+
+    <!-- TRANG CHỦ -->
+    <section id="homePage" class="container">
+
+        <!-- Tab Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-target="tab-play">🎮 Chơi ngay</button>
+            <button class="tab-btn" data-target="tab-leaderboard">🏆 Xếp hạng</button>
+        </div>
+
+        <!-- Tab: Chơi ngay -->
+        <div class="tab-content active" id="tab-play">
+            <div class="card-panel hero-section">
+                <h2>Bắt đầu thử thách</h2>
+                <p>Hãy nhập một tên độc nhất để ghi danh vào Bảng vàng!</p>
+
+                <div class="name-input-group">
+                    <input type="text" id="playerNameInput" placeholder="Nhập tên người chơi"
+                        maxlength="24">
+                    <p id="playerNameError" class="error-text"></p>
+                    <button class="btn-game btn-number" id="btnStartGame"
+                        style="width: 100%; padding: 15px; font-size: 1.2rem; border-radius: 12px; margin-top: 15px;">CHƠI
+                        NGAY</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Bảng xếp hạng -->
+        <div class="tab-content" id="tab-leaderboard">
+            <div class="card-panel leaderboard-section">
+                <h3>🏆 Bảng xếp hạng Top 10</h3>
+                <div class="leaderboard-list" id="leaderboardList">
+                    <!-- Data will be injected here -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Overlay Luật chơi -->
+    <div class="overlay" id="rulesOverlay">
+        <div class="modal-card rules-modal">
+            <h2>📖 LUẬT CHƠI</h2>
+            <ul class="rules-list">
+                <li>Mỗi câu phải sử dụng <strong>đúng toàn bộ 4 số</strong> đã cho cùng các phép toán <strong>+, -, ×, ÷ và dấu ngoặc</strong>.</li>
+                <li><strong>Có thể ghép các số liền nhau</strong> để tạo thành số có nhiều chữ số (ví dụ: 4 và 4 thành 44).</li>
+                <li>Mỗi câu sẽ đi theo thứ tự <strong>Hint 1 → Hint 2 → Đáp án</strong>. Người chơi phải dùng lần lượt theo đúng thứ tự.</li>
+                <li>
+                    Mỗi câu có <strong>thời gian hoàn thành giới hạn</strong>:<br><br>
+                    • Easy: <strong>10 giây</strong><br>
+                    • Medium: <strong>20 giây</strong><br>
+                    • Hard: <strong>30 giây</strong><br>
+                    • Super Hard: <strong>60 giây</strong><br><br>
+                    Sau khi hết thời gian, <strong>mỗi giây vượt quá sẽ bị trừ 2 điểm</strong>.
+                </li>
+                <li>Trả lời <strong>đúng</strong> sẽ được <strong>cộng 100 điểm</strong>. Nếu trả lời <strong>sai và thử lại</strong>, mỗi lần nộp sai sẽ bị <strong>trừ 20 điểm</strong>.</li>
+                <li>Nếu chọn <strong>Bỏ cuộc</strong>, trò chơi sẽ kết thúc và tiến trình hiện tại sẽ <strong>không được lưu</strong> vào Bảng xếp hạng.</li>
+                <li>Hãy hoàn thành các câu hỏi <strong>nhanh và chính xác</strong> để đạt số điểm cao nhất và ghi tên mình trên <strong>Bảng xếp hạng</strong>.</li>
+            </ul>
+            <button class="btn-action btn-submit" id="btnConfirmRules" style="width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 12px; margin-top: 10px;">Tôi đã đọc và hiểu luật</button>
+        </div>
+    </div>
+
+    <!-- TRANG GAME -->
+    <section id="gamePage" class="container" style="display: none;">
+        <div class="game-panel">
+
+            <!-- Trạng thái game -->
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">Người chơi</span>
+                    <span class="status-value" id="currentPlayerName" style="color: var(--color-accent);">Player</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Điểm</span>
+                    <span class="status-value score" id="scoreValue">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Tổng thời gian</span>
+                    <span class="status-value timer" id="timerValue">00:00</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Thời gian câu</span>
+                    <span class="status-value" id="questionTimerValue" style="color: var(--color-accent);">00:00</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Hint</span>
+                    <span class="status-value" id="hintValue">0</span>
+                </div>
+            </div>
+
+            <!-- Cấp độ & Tiến trình -->
+            <div class="level-info-container">
+                <div class="level-name" id="levelName">Easy - Câu 1</div>
+                <div class="level-badge badge-easy" id="levelBadge">LEVEL: EASY</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-text" id="progressText">
+                    <span>Tiến độ</span>
+                    <span>Câu 1 / 20</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Số mục tiêu -->
+            <div class="target-display">
+                <span class="target-label">Mục tiêu</span>
+                <span class="target-number" id="targetNumber">24</span>
+            </div>
+
+            <!-- Hiển thị biểu thức người chơi -->
+            <div class="expression-box" id="expressionBox"></div>
+
+            <!-- Bảng điều khiển: Số và Phép toán -->
+            <div class="controls-grid">
+                <div class="numbers-grid" id="numbersGrid">
+                    <!-- Numbers will be injected here -->
+                </div>
+                <div class="operators-grid" id="operatorsGrid">
+                    <button class="btn-game btn-operator" data-val="+">+</button>
+                    <button class="btn-game btn-operator" data-val="-">-</button>
+                    <button class="btn-game btn-operator" data-val="*">×</button>
+                    <button class="btn-game btn-operator" data-val="/">÷</button>
+                    <button class="btn-game btn-operator" data-val="(">(</button>
+                    <button class="btn-game btn-operator" data-val=")">)</button>
+                </div>
+            </div>
+
+            <!-- Hành động -->
+            <div class="actions-grid">
+                <button class="btn-action btn-delete" id="btnDelete">Xóa 1</button>
+                <button class="btn-action btn-clear" id="btnClear">Xóa hết</button>
+                <button class="btn-action btn-hint" id="btnHint">Hint</button>
+                <button class="btn-action btn-submit" id="btnSubmit">Nộp bài</button>
+            </div>
+
+            <!-- Thông báo kết quả -->
+            <div class="feedback-msg" id="feedbackMsg"></div>
+
+            <!-- Nút Bỏ cuộc -->
+            <button class="btn-action" id="btnSkip"
+                style="width: 100%; margin-top: 15px; background: rgba(255,255,255,0.05); color: #94a3b8; padding: 12px; font-size: 0.9rem;">Bỏ cuộc</button>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>Phát triển bởi <span>CLB STEM THPT Thủ Đức</span>. Nâng cao tư duy - Kiến tạo tương lai.</p>
+    </footer>
+
+    <!-- Overlay Stats / Win -->
+    <div class="overlay" id="statsOverlay">
+        <div class="modal-card">
+            <h2 id="statsTitle">KẾT THÚC</h2>
+
+            <p id="statsMessage" style="color: var(--text-secondary); margin-bottom: 10px;">
+                Bạn đã hoàn thành toàn bộ thử thách STEM Mathrix!
+            </p>
+            <p id="top3Alert"
+                style="color: var(--color-success); font-weight: bold; font-size: 1.2rem; display: none; margin-bottom: 10px;">
+                🎉 Chúc mừng! Bạn đã hoàn thành trò chơi! 🎉</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="label">Tổng thời gian</span>
+                    <span class="value" id="statTime">00:00</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Câu đúng</span>
+                    <span class="value" id="statCorrect">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Số Hint đã dùng</span>
+                    <span class="value" id="statHints">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Tổng Điểm</span>
+                    <span class="value" style="color: #f59e0b" id="statScore">0</span>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:15px; justify-content:center;">
+                <button class="btn-action btn-submit" id="btnGoHome">Xem bảng xếp hạng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Quit Confirm Modal -->
+    <div class="overlay" id="skipConfirmOverlay">
+        <div class="modal-card" style="max-width: 450px; padding: 30px;">
+            <h2 style="color: var(--color-warning); font-size: 1.8rem; margin-bottom: 15px;">⚠️ BỎ CUỘC?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; font-size: 1rem; line-height: 1.5;">
+                Bạn có chắc muốn kết thúc trò chơi?<br>
+                Tiến trình hiện tại sẽ không được lưu vào Bảng xếp hạng.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button class="btn-action" id="btnCancelSkip" style="background: rgba(255,255,255,0.1); color: var(--text-secondary); flex: 1; padding: 12px; font-size: 1rem;">Tiếp tục chơi</button>
+                <button class="btn-action btn-submit" id="btnConfirmSkip" style="background: linear-gradient(135deg, #ef4444, #dc2626); flex: 1; padding: 12px; font-size: 1rem;">Bỏ cuộc</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Banner Transition -->
+    <div class="level-banner" id="levelBanner">LEVEL: EASY</div>
+
+    <!-- Personal Avatar -->
+    <div class="author-avatar">Sun</div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/parser.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
