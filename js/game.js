@@ -133,6 +133,29 @@ class Game {
         }
     }
 
+    resetExpressionState() {
+        const tokensToRelease = [...this.state.tokens];
+        this.state.tokens = [];
+
+        tokensToRelease.forEach(token => {
+            if (token.type === 'number' && Array.isArray(token.elements)) {
+                token.elements.forEach(btn => {
+                    if (btn) btn.classList.remove('used');
+                });
+            }
+        });
+
+        UI.renderExpression(this.state.tokens);
+        UI.clearFeedback();
+    }
+
+    expressionMatchesTokenSequence(tokensToCompare) {
+        if (!Array.isArray(tokensToCompare) || !Array.isArray(this.state.tokens)) return false;
+        if (this.state.tokens.length !== tokensToCompare.length) return false;
+
+        return this.state.tokens.every((token, index) => String(token.value) === String(tokensToCompare[index]));
+    }
+
     // --- HINT 1: giữ nguyên nội dung gợi ý chữ như cũ ---
     useHint() {
         if (!this.state.hint1UsedThisLevel) {
@@ -183,6 +206,8 @@ class Game {
         this.state.score = Math.max(0, this.state.score - 40);
         UI.updateStats(this.state.score, this.state.timeElapsed, this.state.totalHintsUsed);
 
+        this.resetExpressionState();
+        UI.setHintState(false);
         this.playHintTokenSequence(hintStep, () => {
             UI.els.btnHint.textContent = 'Đáp án';
             UI.setHintState(true);
@@ -202,6 +227,7 @@ class Game {
 
         const level = LEVELS[this.state.currentLevelIndex];
         const fullSolution = Array.isArray(level.fullSolution) ? level.fullSolution : [];
+        const hintStep = Array.isArray(level.hintStep) ? level.hintStep : [];
         if (fullSolution.length === 0) {
             return UI.showFeedback("Không có đáp án mẫu cho câu này.", "warning");
         }
@@ -210,6 +236,18 @@ class Game {
         this.state.answerUsedThisLevel = true;
         this.state.score = Math.max(0, this.state.score - 50);
         UI.updateStats(this.state.score, this.state.timeElapsed, this.state.totalHintsUsed);
+
+        const currentMatchHint2 = this.expressionMatchesTokenSequence(hintStep);
+
+        if (!currentMatchHint2) {
+            this.resetExpressionState();
+            UI.setHintState(false);
+            this.playHintTokenSequence(fullSolution, () => {
+                UI.flashExpressionBox();
+                UI.showFeedback("💡 Đáp án đã được điền hoàn chỉnh.", "warning");
+            });
+            return;
+        }
 
         const remainingTokens = fullSolution.slice(this.state.tokens.length);
         if (remainingTokens.length === 0) {
@@ -418,10 +456,10 @@ class Game {
     }
 
     /**
-     * Phạt trừ 2 điểm mỗi giây khi hết thời gian câu
+     * Phạt trừ 1 điểm mỗi giây khi hết thời gian câu
      */
     applyOvertimePenalty() {
-        this.state.score = Math.max(0, this.state.score - 2);
+        this.state.score = Math.max(0, this.state.score - 1);
         UI.updateStats(this.state.score, this.state.timeElapsed, this.state.totalHintsUsed);
     }
 
