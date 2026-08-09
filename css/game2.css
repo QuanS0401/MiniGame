@@ -576,10 +576,9 @@ footer.site-footer {
     .game2-header { flex-wrap: wrap; gap: 12px; }
 
     .game2-board-container {
-        padding: 8px 0;
         width: 100%;
-        max-width: 100%;
-        overflow: hidden;
+        padding: 8px 0;
+        overflow: visible;
     }
 
     .game2-board {
