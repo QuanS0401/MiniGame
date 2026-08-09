@@ -8,6 +8,7 @@
 }
 
 * { box-sizing: border-box; margin:0; padding:0 }
+html { overflow-x: hidden; }
 body {
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     background: radial-gradient(circle at top center, rgba(56,189,248,0.12), transparent 40%), linear-gradient(135deg,#020617,#071024);
@@ -16,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 .site-header {
@@ -78,15 +80,28 @@ main { flex: 1 }
 .card-left { font-size:1.8rem }
 .card-body h3 { margin:0; font-size:1.1rem }
 .card-body p { margin:3px 0 0; color:var(--text-secondary); font-size:0.95rem }
-.card-action { margin-left:auto }
-.btn-play { padding:10px 14px; border-radius:10px; font-weight:800; color:#071024; text-decoration:none; background:linear-gradient(135deg,var(--color-primary),var(--color-accent)) }
-.btn-disabled { padding:10px 12px; border-radius:10px; background: rgba(255,255,255,0.02); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.03) }
+.card-action { margin-left:auto; flex-shrink: 0; }
+.btn-play { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding:10px 14px; border-radius:10px; font-weight:800; color:#071024; text-decoration:none; background:linear-gradient(135deg,var(--color-primary),var(--color-accent)) }
+.btn-disabled { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding:10px 12px; border-radius:10px; background: rgba(255,255,255,0.02); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.03) }
 
 .site-footer { text-align:center; color:var(--text-secondary); margin-top: auto; }
 
-@media (max-width:600px) {
-    .header-text h1 { font-size:1.6rem }
-    .game-card { padding:12px }
+@media (max-width: 600px) {
+    body { padding: 14px; }
+    .club-logo { width: 64px; height: 64px; }
+    .header-text h1 { font-size: clamp(1.4rem, 7vw, 1.8rem); }
+    .header-text p { font-size: 0.95rem; }
+    .game-card { padding: 12px; flex-wrap: wrap; }
+    .card-body { min-width: 0; }
+    .card-body h3, .card-body p { overflow-wrap: break-word; }
+    .card-action { width: 100%; margin-left: 0; }
+    .btn-play, .btn-disabled { display: flex; width: 100%; }
+}
+
+@media (max-width: 380px) {
+    .club-logo { width: 56px; height: 56px; }
+    .header-text h1 { font-size: 1.3rem; }
+    .club-slogan { font-size: 0.75rem; letter-spacing: 1px; }
 }
 
 /* Animations */
