@@ -574,11 +574,35 @@ footer.site-footer {
     .game2-page { padding: 0 12px 20px; }
     .game2-panel { padding: 14px; border-radius: 18px; }
     .game2-header { flex-wrap: wrap; gap: 12px; }
-    .game2-board-container { padding: 8px; }
+
+    .game2-board-container {
+        padding: 8px 0;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .game2-board {
+        width: 100%;
+        max-width: 460px;
+        box-sizing: border-box;
+    }
+
     .status-pill { min-width: 120px; padding: 10px 12px; }
-    .modal-card { padding: 22px; max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .modal-card {
+        padding: 22px;
+        max-height: 90vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
     .modal-card h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
-    .level-banner { padding: 18px 30px; font-size: clamp(1.4rem, 8vw, 2.1rem); letter-spacing: 2px; width: min(90vw, 420px); text-align: center; }
+    .level-banner {
+        padding: 18px 30px;
+        font-size: clamp(1.4rem, 8vw, 2.1rem);
+        letter-spacing: 2px;
+        width: min(90vw, 420px);
+        text-align: center;
+    }
 }
 
 @media (max-width: 380px) {
