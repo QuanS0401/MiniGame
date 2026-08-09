@@ -124,6 +124,10 @@ let answerModeActive = false;
 let solutionStepIndex = 0;
 let usedAnswerThisLevel = false;
 
+// Movement cooldown (shared by keyboard and swipe input)
+let lastMoveTime = 0;
+const MOVE_COOLDOWN_MS = 100;
+
 const DIRECTION_MAP = {
     'up': { dx: 0, dy: -1 },
     'down': { dx: 0, dy: 1 },
@@ -192,7 +196,8 @@ function renderBoard() {
     const rows = tiles.length;
     const cols = tiles[0].length;
 
-    boardElement.style.gridTemplateColumns = `repeat(${cols}, minmax(42px, 42px))`;
+    boardElement.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    boardElement.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
 
     let arrowCellX = -1;
     let arrowCellY = -1;
@@ -399,6 +404,17 @@ function movePlayer(dx, dy) {
     }
 }
 
+// Shared entry point for keyboard AND swipe input: enforces the movement
+// cooldown so rapid key-spam / repeated swipes can't move faster than
+// MOVE_COOLDOWN_MS apart. Both input methods funnel into the same
+// movePlayer() logic, so scoring/step-counting/rules are untouched.
+function attemptMove(dx, dy) {
+    const now = Date.now();
+    if (now - lastMoveTime < MOVE_COOLDOWN_MS) return;
+    lastMoveTime = now;
+    movePlayer(dx, dy);
+}
+
 function calculateScore() {
     const currentLevel = levels[currentLevelIndex];
     const difference = currentLevel.targetSteps - moveCount;
@@ -493,7 +509,7 @@ function handleInput(event) {
 
     if (direction && !quitConfirmOverlay.classList.contains('active') && !rulesOverlay.classList.contains('active')) {
         event.preventDefault();
-        movePlayer(direction.dx, direction.dy);
+        attemptMove(direction.dx, direction.dy);
     }
 }
 
@@ -538,6 +554,53 @@ function initGame2() {
         if (quitConfirmOverlay) {
             quitConfirmOverlay.classList.remove('active');
         }
+    });
+
+    // Swipe-to-move (touch only). Reuses attemptMove/movePlayer — same
+    // Sokoban movement + cooldown logic as WASD/arrow keys. Only swipes
+    // starting inside the game board count, and only horizontal/vertical
+    // page scrolling triggered by those swipes is suppressed.
+    const SWIPE_THRESHOLD_PX = 30;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchTracking = false;
+
+    boardElement.addEventListener('touchstart', (event) => {
+        if (gameCompleted || gameLocked) return;
+        if (quitConfirmOverlay.classList.contains('active') || rulesOverlay.classList.contains('active')) return;
+        if (event.touches.length !== 1) return;
+        touchTracking = true;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    boardElement.addEventListener('touchmove', (event) => {
+        if (!touchTracking) return;
+        // Prevent the page from scrolling while swiping on the board.
+        event.preventDefault();
+    }, { passive: false });
+
+    boardElement.addEventListener('touchend', (event) => {
+        if (!touchTracking) return;
+        touchTracking = false;
+        if (gameCompleted || gameLocked) return;
+        if (quitConfirmOverlay.classList.contains('active') || rulesOverlay.classList.contains('active')) return;
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX && Math.abs(deltaY) < SWIPE_THRESHOLD_PX) return;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            attemptMove(deltaX > 0 ? 1 : -1, 0);
+        } else {
+            attemptMove(0, deltaY > 0 ? 1 : -1);
+        }
+    });
+
+    boardElement.addEventListener('touchcancel', () => {
+        touchTracking = false;
     });
 }
 
