@@ -198,6 +198,7 @@ function renderBoard() {
 
     boardElement.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
     boardElement.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+    boardElement.style.aspectRatio = `${cols} / ${rows}`;
 
     let arrowCellX = -1;
     let arrowCellY = -1;
