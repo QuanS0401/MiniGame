@@ -576,7 +576,7 @@ footer.site-footer {
     .game2-header { flex-wrap: wrap; gap: 12px; }
     .game2-board-container { padding: 8px; }
     .status-pill { min-width: 120px; padding: 10px 12px; }
-    .modal-card { padding: 22px; }
+    .modal-card { padding: 22px; max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .modal-card h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
     .level-banner { padding: 18px 30px; font-size: clamp(1.4rem, 8vw, 2.1rem); letter-spacing: 2px; width: min(90vw, 420px); text-align: center; }
 }
