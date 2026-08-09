@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Mathrix - Game 2</title>
+    <link rel="icon" href="../images/LOGO STEM REMOVE BACKGROUND.png" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/game2.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand-container">
+            <img src="../images/LOGO STEM official.png" alt="Logo CLB STEM" class="club-logo">
+        </div>
+        <div class="header-text">
+            <div class="club-slogan">CLB STEM THPT Thủ Đức</div>
+            <h1>Game 2 - Sokoban</h1>
+            <p>Đẩy thùng vào vị trí đích bằng các phím W/A/S/D hoặc các phím mũi tên.</p>
+        </div>
+    </header>
+
+    <main class="game2-page">
+        <section class="game2-panel">
+            <div class="game2-header">
+                <div>
+                    <h2 id="levelName">Easy</h2>
+                    <p class="level-subtitle">Số bước đã dùng: <span id="moveCount">0</span></p>
+                </div>
+                <div class="game2-actions">
+                    <button class="btn-action" id="answerButton">Đáp án</button>
+                    <button class="btn-action" id="restartButton">Khởi động lại</button>
+                </div>
+            </div>
+
+            <div class="game2-board-container">
+                <div id="gameBoard" class="game2-board" aria-label="Bảng Sokoban"></div>
+            </div>
+
+            <div class="game2-footer">
+                <div class="status-pill">
+                    <span class="status-label">Điểm</span>
+                    <span class="status-value" id="scoreBadge">0</span>
+                </div>
+                <div class="status-pill">
+                    <span class="status-label">Số bước chuẩn còn lại</span>
+                    <span class="status-value" id="targetStepsBadge">0</span>
+                </div>
+            </div>
+
+            <button class="btn-action" id="quitButton">Bỏ cuộc</button>
+        </section>
+
+        <div class="overlay" id="quitConfirmOverlay">
+            <div class="modal-card quit-card" style="max-width: 450px; padding: 30px;">
+                <h2 style="color: var(--accent); font-size: 1.8rem; margin-bottom: 15px; background: none; -webkit-text-fill-color: initial;">⚠️ BỎ CUỘC?</h2>
+                <p style="color: var(--muted); margin-bottom: 25px; font-size: 1rem; line-height: 1.5;">
+                    Bạn có chắc muốn kết thúc trò chơi?<br>
+                    Tiến trình hiện tại sẽ không được lưu.
+                </p>
+                <div class="quit-actions">
+                    <button class="btn-action btn-quit-cancel" id="cancelQuitButton">Tiếp tục chơi</button>
+                    <a class="btn-action btn-quit-confirm" href="menu.html">Đồng ý</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-banner" id="levelBanner">LEVEL</div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Phát triển bởi <span>CLB STEM THPT Thủ Đức</span>. Nâng cao tư duy - Kiến tạo tương lai.</p>
+    </footer>
+
+    <div class="overlay active" id="rulesOverlay">
+        <div class="modal-card rules-modal">
+            <h2>📖 LUẬT CHƠI</h2>
+            <ul class="rules-list">
+                <li>Mục tiêu là <strong>đẩy tất cả các thùng vào đúng ô đích</strong> ở mỗi màn chơi.</li>
+                <li>Điều khiển Player bằng <strong>W/A/S/D</strong> hoặc các phím <strong>mũi tên</strong>.</li>
+                <li>Chỉ có thể <strong>đẩy</strong> thùng, <strong>không thể kéo</strong> thùng; không thể đẩy thùng vào tường hoặc vào một thùng khác.</li>
+                <li>Trò chơi gồm <strong>6 màn</strong>, chia thành 3 cấp độ <strong>Easy, Medium, Hard</strong> (mỗi cấp độ 2 màn). Hoàn thành xong một màn sẽ tự động chuyển sang màn tiếp theo.</li>
+                <li>Mỗi màn có một <strong>số bước chuẩn</strong>: đi càng ít bước hơn số bước chuẩn thì điểm màn đó càng cao, đi nhiều bước hơn số bước chuẩn thì điểm sẽ giảm dần (thấp nhất là 0 điểm).</li>
+                <li>Nếu nhấn <strong>"Đáp án"</strong>, màn hiện tại sẽ được khởi động lại và các <strong>mũi tên chỉ hướng đi</strong> theo lời giải sẽ lần lượt hiện ra để dẫn đường. <span style="color: red;"><strong>Lưu ý:</strong> Dùng "Đáp án" khiến màn đó không được tính điểm.</span></li>
+                <li>Nếu đẩy thùng sai khiến thùng bị kẹt, hãy dùng nút <strong>"Khởi động lại"</strong> để chơi lại màn hiện tại từ đầu.</li>
+                <li>Nếu chọn <strong>"Bỏ cuộc"</strong>, trò chơi sẽ kết thúc và tiến trình hiện tại sẽ <strong>không được lưu</strong>.</li>
+                <li>Hoàn thành cả 6 màn để <strong>chiến thắng</strong>.</li>
+            </ul>
+            <button class="btn-action btn-submit" id="btnConfirmRules">Tôi đã đọc và hiểu luật</button>
+        </div>
+    </div>
+
+    <!-- Overlay Stats / Win -->
+    <div class="overlay" id="statsOverlay">
+        <div class="modal-card">
+            <h2 id="statsTitle">KẾT THÚC</h2>
+
+            <p id="statsMessage" style="color: var(--muted); margin-bottom: 10px;">
+                Bạn đã hoàn thành toàn bộ thử thách Sokoban!
+            </p>
+            <p id="top3Alert"
+                style="color: var(--success); font-weight: bold; font-size: 1.2rem; display: none; margin-bottom: 10px;">
+                🎉 Chúc mừng! Bạn đã hoàn thành trò chơi! 🎉</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="label">Số màn vượt qua</span>
+                    <span class="value" id="statLevels">6/6</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Tổng Điểm</span>
+                    <span class="value" style="color: #f59e0b" id="statScore">0</span>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:15px; justify-content:center;">
+                <a class="btn-action btn-submit" href="menu.html">Về Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/game2/game2.js"></script>
+</body>
+</html>
