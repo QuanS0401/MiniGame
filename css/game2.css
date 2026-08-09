@@ -173,7 +173,9 @@ body {
     border-radius: 18px;
     border: 1px solid rgba(148,163,184,0.14);
     width: min(100%, 460px);
-    aspect-ratio: 10 / 6;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
     touch-action: none;
 }
 
@@ -582,10 +584,12 @@ footer.site-footer {
     }
 
     .game2-board {
-        width: 100%;
-        max-width: 460px;
-        box-sizing: border-box;
-    }
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
 
     .status-pill { min-width: 120px; padding: 10px 12px; }
     .modal-card {
