@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Mathrix - Game 3</title>
+    <link rel="icon" href="../images/LOGO STEM REMOVE BACKGROUND.png" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/game3.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="brand-container">
+            <img src="../images/LOGO STEM official.png" alt="Logo CLB STEM" class="club-logo">
+        </div>
+        <div class="header-text">
+            <div class="club-slogan">CLB STEM THPT Thủ Đức</div>
+            <h1>Game 3 - Sumplete</h1>
+            <p>Xóa đúng số để tổng mỗi hàng, mỗi cột khớp với mục tiêu.</p>
+        </div>
+    </header>
+
+    <main class="game3-page">
+        <section class="game3-panel">
+
+            <div class="level-info-container">
+                <div class="level-name" id="levelName">Easy - Màn 1</div>
+                <div class="level-badge badge-easy" id="levelBadge">LEVEL: EASY</div>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">Điểm</span>
+                    <span class="status-value score" id="scoreValue">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Thời gian</span>
+                    <span class="status-value timer" id="timerValue">00:00</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Gợi ý đã dùng</span>
+                    <span class="status-value" id="hintValue">0</span>
+                </div>
+            </div>
+
+            <div class="game3-board-container">
+                <div id="gameBoard" class="sumplete-grid" aria-label="Lưới Sumplete"></div>
+            </div>
+
+            <div class="feedback-msg" id="feedbackMsg"></div>
+
+            <div class="game3-actions">
+                <button class="btn-action btn-hint" id="btnHint">Gợi ý</button>
+            </div>
+
+            <button class="btn-action" id="btnQuit"
+                style="width: 100%; margin-top: 5px; background: rgba(255,255,255,0.05); color: #94a3b8; padding: 12px; font-size: 0.9rem;">Bỏ cuộc</button>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Phát triển bởi <span>CLB STEM THPT Thủ Đức</span>. Nâng cao tư duy - Kiến tạo tương lai.</p>
+    </footer>
+
+    <!-- Overlay Luật chơi -->
+    <div class="overlay" id="rulesOverlay">
+        <div class="modal-card rules-modal">
+            <h2>📖 LUẬT CHƠI</h2>
+            <ul class="rules-list">
+                <li>Mỗi ô số chỉ có <strong>2 trạng thái</strong>: bấm vào ô để đánh dấu <strong>"Xóa" (✕)</strong>, bấm lại để bỏ đánh dấu, trở về <strong>Bình thường</strong>.</li>
+                <li>Mục tiêu: <strong>xóa đúng những số cần loại</strong> để các số còn lại (ô "Bình thường") của mỗi hàng, mỗi cột <strong>cộng lại đúng bằng số mục tiêu</strong> hiển thị bên phải hàng / bên dưới cột.</li>
+                <li>Nhãn mục tiêu <strong>không hiển thị tổng hiện tại</strong> — nó sẽ tự <strong>sáng màu xanh</strong> ngay khi hàng/cột đó đã đúng, giúp bạn biết mình đang đi đúng hướng mà không lộ luôn phép tính.</li>
+                <li>Khi <strong>tất cả</strong> hàng và cột đều đúng, màn sẽ <strong>tự động chuyển sang màn tiếp theo sau 0.5 giây</strong>.</li>
+                <li>Trò chơi gồm nhiều màn, chia thành các cấp độ tăng dần <strong>Easy (3×3), Medium (4×4), Hard (5×5), Super Hard (7×7)</strong>.</li>
+                <li>Mỗi màn có <strong>điểm gốc</strong> và <strong>thời gian chuẩn</strong>: Easy 100 điểm/60s, Medium 200 điểm/90s, Hard 300 điểm/120s, Super Hard 500 điểm/150s. Vượt quá thời gian chuẩn sẽ <strong>bị trừ 1 điểm mỗi giây</strong>.</li>
+                <li>Bấm <strong>"Gợi ý"</strong> để tự động hé lộ đúng trạng thái của 1 ô bất kỳ đang sai. Có thể bấm gợi ý nhiều lần tùy ý, nhưng mỗi màn chỉ được tính điểm trọn vẹn nếu dùng ít gợi ý hơn số quy định (Easy: dưới 1 lượt, Medium: dưới 3 lượt, Hard: dưới 5 lượt, Super Hard: dưới 10 lượt); dùng càng nhiều gợi ý trong giới hạn đó thì điểm màn càng giảm dần, dùng đủ hoặc vượt số quy định thì màn đó không được tính điểm (không bị trừ điểm, chỉ là 0 điểm).</li>
+                <li>Nếu chọn <strong>"Bỏ cuộc"</strong>, trò chơi sẽ kết thúc và tiến trình hiện tại sẽ <strong>không được lưu</strong>.</li>
+            </ul>
+            <button class="btn-action btn-submit" id="btnConfirmRules" style="width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 12px; margin-top: 10px;">Tôi đã đọc và hiểu luật</button>
+        </div>
+    </div>
+
+    <!-- Custom Quit Confirm Modal -->
+    <div class="overlay" id="quitConfirmOverlay">
+        <div class="modal-card" style="max-width: 450px; padding: 30px;">
+            <h2 style="color: #f59e0b; font-size: 1.8rem; margin-bottom: 15px;">⚠️ BỎ CUỘC?</h2>
+            <p style="color: var(--muted); margin-bottom: 25px; font-size: 1rem; line-height: 1.5;">
+                Bạn có chắc muốn kết thúc trò chơi?<br>
+                Tiến trình hiện tại sẽ không được lưu.
+            </p>
+            <div class="quit-actions">
+                <button class="btn-action btn-quit-cancel" id="btnCancelQuit">Tiếp tục chơi</button>
+                <button class="btn-action btn-quit-confirm" id="btnConfirmQuit">Bỏ cuộc</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay Stats / Win -->
+    <div class="overlay" id="statsOverlay">
+        <div class="modal-card">
+            <h2 id="statsTitle">KẾT THÚC</h2>
+
+            <p id="statsMessage" style="color: var(--muted); margin-bottom: 10px;">
+                Bạn đã hoàn thành toàn bộ thử thách Sumplete!
+            </p>
+            <p id="top3Alert"
+                style="color: var(--success); font-weight: bold; font-size: 1.2rem; display: none; margin-bottom: 10px;">
+                🎉 Chúc mừng! Bạn đã hoàn thành trò chơi! 🎉</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="label">Số màn vượt qua</span>
+                    <span class="value" id="statLevels">0/6</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Tổng Điểm</span>
+                    <span class="value" style="color: #f59e0b" id="statScore">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Thời gian</span>
+                    <span class="value" id="statTime">00:00</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Gợi ý đã dùng</span>
+                    <span class="value" id="statHints">0</span>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:15px; justify-content:center;">
+                <a class="btn-action btn-submit" href="menu.html">Về Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Banner Transition -->
+    <div class="level-banner" id="levelBanner">LEVEL: EASY</div>
+
+    <!-- Personal Avatar -->
+    <div class="author-avatar">Sun</div>
+
+    <!-- Scripts -->
+    <script src="../js/game3/data.js"></script>
+    <script src="../js/game3/ui.js"></script>
+    <script src="../js/game3/game.js"></script>
+    <script src="../js/game3/app.js"></script>
+</body>
+
+</html>
