@@ -445,16 +445,15 @@ function showLevelTransition(nextIndex) {
 }
 
 function showEndGameModal() {
-    const statMoves = document.getElementById('statMoves');
+    const statsTitle = document.getElementById('statsTitle');
+    if (statsTitle) statsTitle.innerHTML = '🎉 CHÚC MỪNG! 🎉';
+
     const statScore = document.getElementById('statScore');
-    const statHints = document.getElementById('statHints');
     const statLevels = document.getElementById('statLevels');
     const statsOverlay = document.getElementById('statsOverlay');
     const top3Alert = document.getElementById('top3Alert');
 
-    if (statMoves) statMoves.textContent = totalMoves;
     if (statScore) statScore.textContent = totalScore;
-    if (statHints) statHints.textContent = '0';
     if (statLevels) statLevels.textContent = `${levels.length}/${levels.length}`;
 
     if (top3Alert) {
