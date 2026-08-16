@@ -131,7 +131,7 @@ const UI = {
         if (el('statCorrect')) el('statCorrect').textContent = correctCount;
         if (el('statHints')) el('statHints').textContent = hints;
         if (el('statScore')) el('statScore').textContent = score;
-        if (this.els.top3Alert) this.els.top3Alert.style.display = 'none';
+        if (this.els.top3Alert) this.els.top3Alert.style.display = 'block';
         if (this.els.statsOverlay) this.els.statsOverlay.classList.add('active');
     },
 

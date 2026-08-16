@@ -186,7 +186,7 @@ class Game {
     stopQuestionTimer() { if (this.questionTimerInterval) { clearInterval(this.questionTimerInterval); this.questionTimerInterval = null; } }
     resetQuestionTimer() { const levelData = LEVELS[this.state.currentLevelIndex]; const durations = { 'Easy': 10, 'Medium': 20, 'Hard': 30, 'Super Hard': 60 }; this.state.questionTimeLeft = durations[levelData.group] || 10; this.updateQuestionDisplay(); this.startQuestionTimer(); }
     updateQuestionTimer() { if (this.state.questionTimeLeft > 0) this.state.questionTimeLeft--; else this.applyOvertimePenalty(); this.updateQuestionDisplay(); }
-    applyOvertimePenalty() { this.state.score = Math.max(0, this.state.score - 1); UI.updateStats(this.state.score, this.state.timeElapsed, this.state.totalHintsUsed); }
+    applyOvertimePenalty() { this.state.score = Math.max(0, this.state.score - 2); UI.updateStats(this.state.score, this.state.timeElapsed, this.state.totalHintsUsed); }
     updateQuestionDisplay() { UI.updateQuestionTimer(this.state.questionTimeLeft); }
     skipQuestion() { UI.showSkipConfirm(); }
     cancelSkip() { UI.hideSkipConfirm(); }
