@@ -1,0 +1,495 @@
+:root {
+    --bg-main: #020617;
+    --bg-panel: rgba(15, 23, 42, 0.95);
+    --bg-card: rgba(30, 41, 59, 0.8);
+    --border-color: rgba(56, 189, 248, 0.2);
+    --text: #f8fafc;
+    --muted: #cbd5e1;
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --accent-3: #c084fc;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top center, rgba(56, 189, 248, 0.15), transparent 40%), linear-gradient(135deg, var(--bg-main), #0f172a);
+    color: var(--text);
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Header & Branding */
+.site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.club-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: white;
+    object-fit: cover;
+    box-shadow: var(--shadow-glow);
+    animation: float 6s ease-in-out infinite;
+}
+
+.header-text h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent-3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+    margin-bottom: 0.5rem;
+}
+
+.header-text p {
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.club-slogan {
+    font-size: 0.9rem;
+    color: var(--accent-2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Page / panel */
+.game4-page {
+    padding: 0 32px 32px;
+}
+
+.game4-panel {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+/* Level info + status bar */
+.level-info-container { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap: wrap; gap: 10px; }
+.level-name { font-size:1.5rem; font-weight:700 }
+.level-badge { padding:8px 16px; border-radius:999px; font-weight:700; font-size:0.9rem; border:1px solid var(--accent); color: var(--accent); background: rgba(56,189,248,0.12); }
+.badge-easy { background: rgba(34,197,94,0.18); color: var(--success); border-color: var(--success); }
+.badge-medium { background: rgba(56,189,248,0.18); color: var(--accent); border-color: var(--accent); }
+.badge-hard { background: rgba(249,115,22,0.18); color: #f97316; border-color: #f97316; }
+.badge-superhard { background: rgba(192,132,252,0.18); color: var(--accent-3); border-color: var(--accent-3); }
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.status-item { display:flex; flex-direction:column; align-items:center; flex: 1; min-width: 80px; }
+.status-label { font-size:0.8rem; color:var(--muted); text-transform:uppercase; margin-bottom:4px }
+.status-value { font-size:1.4rem; font-weight:700; color:var(--accent) }
+.status-value.score { color: #f59e0b }
+.status-value.timer { color: var(--danger) }
+
+/* Bridge board — width stays the panel's own content width (100%, no bleed).
+   Height only grows the SKY headroom above the beam — .board-ground stays a fixed 80px
+   strip glued to the bottom (bottom:0), and .seesaw-pivot/.seesaw-beam are both anchored
+   via `bottom:Npx` off this same box, so a taller board never moves the ground line or
+   the pivot's ground-flush base; the extra room only ever appears above the beam. */
+.bridge-board {
+    position: relative;
+    width: 100%;
+    margin: 10px auto 36px;
+    height: 440px;
+    border-radius: 16px; /* matches .status-bar's border-radius so the two cards read as one visual system */
+    overflow: hidden; /* clip .board-sky/.board-ground to the rounded corners */
+}
+
+/* SKY fills the whole board as the backmost layer; GROUND is a fixed-height strip
+   pinned to the bottom, painted on top of SKY (later in DOM = higher stacking). Both are
+   small tile textures (350x125), so they're stretched to exactly the layer's height and
+   tiled horizontally rather than force-stretched to cover an arbitrarily wide board. */
+.board-sky {
+    position: absolute;
+    inset: 0;
+    background-image: url('../images/game4/SKY.png');
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    z-index: 0;
+}
+
+.board-ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    background-image: url('../images/game4/GROUND.png');
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    z-index: 0;
+}
+
+/* The pivot's triangle BASE must sit exactly on the ground surface (bottom: matches
+   .board-ground's height), never floating above it or sinking below it — its APEX (the
+   beam's rotation center) then sits a further 46px up, that being the triangle's own
+   height. js/game4/ui.js's computeMaxTiltDeg() measures this live off the DOM rather than
+   duplicating these numbers, so any future CSS tweak here stays automatically correct. */
+.seesaw-pivot {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    margin-left: -28px;
+    width: 0;
+    height: 0;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    border-bottom: 46px solid var(--accent-2);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+    z-index: 1;
+}
+
+/* The beam itself is the physical bar — fixed width/height by CSS alone, never
+   resized by its contents. Every plank-slot (and therefore every chip/tick/mark) is
+   position:absolute inside it, positioned purely via a computed `left` percentage, so
+   adding/removing/rearranging items can never change the beam's own box — which is what
+   keeps transform-origin: center center sitting exactly at the beam's true geometric
+   center (and therefore exactly above the pivot tip) at every rotation angle. */
+.seesaw-beam {
+    position: absolute;
+    bottom: 121px;
+    left: 50%;
+    width: 96%;
+    max-width: 800px;
+    height: 10px;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent));
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transform: translateX(-50%) rotate(0deg);
+    transform-origin: center center;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+                background 0.7s ease,
+                box-shadow 0.7s ease;
+    z-index: 2;
+}
+
+/* Dùng để CHỐT thanh cầu về 1 góc mới ngay lập tức, không animate — chỉ bật tạm lúc
+   lockBridgeVisual() đang set góc khóa-nghiêng-trái (vào màn / Thử lại), KHÔNG bật lúc
+   updateBridgeTilt() xoay tới góc thật sau khi bấm Xác nhận (chỗ đó phải animate mượt). */
+.seesaw-beam.snap-instant {
+    transition: none !important;
+}
+
+.seesaw-beam.balanced {
+    background: var(--success);
+    box-shadow: 0 0 22px rgba(34, 197, 94, 0.7);
+}
+
+/* Support stick — props up the beam under its right-side 1.75–2 marks while the bridge
+   is "locked" (placing materials). left/width/bottom/height are all set inline by ui.js's
+   positionSupportStick(), measured live off the plank-slot/beam/ground boxes so its
+   footprint always spans exactly between those two marks and lines up at every breakpoint. */
+.support-stick {
+    position: absolute;
+    background: repeating-linear-gradient(45deg, #f59e0b, #f59e0b 10px, #b45309 10px, #b45309 20px);
+    border-radius: 8px 8px 4px 4px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 0 0 2px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
+
+.support-stick.hidden {
+    display: none;
+}
+
+/* Retry button — surfaces over the bridge board only after a wrong "Xác nhận" has held
+   its tilt for WRONG_RETRY_DELAY_MS (see game.js's confirmPlacement()). */
+.btn-retry {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    padding: 14px 30px;
+    font-size: 1rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.btn-retry.hidden {
+    display: none;
+}
+
+/* Plank slot — one fixed distance mark on the ruler, either side of the pivot.
+   `left` is set inline per-slot (as a % of the beam's own width, computed from its
+   distance). No box/border — just a drop-target hit area (invisible) that rests its
+   chip flush against the beam surface, with a tick + number hanging below it.
+   Anchored via top:0 + translateY(-100%) rather than bottom:100% — this guarantees the
+   slot's OWN bottom edge (whatever its content-driven height ends up being) lands
+   exactly on the beam's top edge, with zero gap, regardless of chip size. */
+.plank-slot {
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 36px;
+    min-height: 20px;
+}
+
+.plank-slot.slot-active {
+    cursor: pointer;
+}
+
+.plank-tick {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 14px;
+    background: var(--border-color);
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.plank-mark {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #111;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+}
+
+.plank-slot.slot-active.drag-over .plank-tick {
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.plank-slot.slot-active.drag-over .plank-mark {
+    color: var(--accent);
+}
+
+.material-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.material-icon-fallback {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    pointer-events: none;
+}
+
+/* Item chip — one draggable/tappable material unit, reused in the tray AND on a plank-slot */
+.tray-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    border-radius: 8px;
+}
+
+.tray-item.locked {
+    cursor: default;
+}
+
+.tray-item.dragging {
+    cursor: grabbing;
+    opacity: 0.85;
+    z-index: 10000;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.5));
+}
+
+.tray-item.selected {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+}
+
+.chip-weight {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #111;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1px 5px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+/* Item tray */
+.tray-container {
+    margin-bottom: 20px;
+}
+
+.tray-title {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.item-tray {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 16px;
+    padding: 16px;
+    min-height: 60px;
+}
+
+/* Actions */
+.game4-actions { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px }
+.btn-action { border:none; border-radius:12px; padding:15px; font-size:1rem; font-weight:700; color:white; cursor:pointer; transition: all 0.2s; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+.btn-action:hover { transform: translateY(-2px); box-shadow:0 8px 15px rgba(0,0,0,0.3); }
+/* Ghi đè .btn-action:hover cho riêng nút Thử lại — nút này được canh giữa bằng
+   translate(-50%, -50%) (xem rule .btn-retry ở trên), nếu để .btn-action:hover set
+   transform: translateY(-2px) một mình thì sẽ xóa mất phần canh giữa đó, làm nút nhảy
+   lệch vị trí lúc hover (xem fix v11). Phải luôn giữ translate(-50%, -50%) làm nền rồi
+   mới cộng thêm hiệu ứng nhấc lên. */
+.btn-retry:hover {
+    transform: translate(-50%, -50%) translateY(-2px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
+}
+.btn-action:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-submit { background: linear-gradient(135deg,#10b981,#059669) }
+.btn-hint { background: linear-gradient(135deg,#8b5cf6,#7c3aed) }
+.btn-confirm { background: linear-gradient(135deg, var(--accent), var(--accent-2)) }
+
+/* Overlays (shared) */
+.overlay { position: fixed; inset:0; background: rgba(2,6,23,0.85); backdrop-filter: blur(10px); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; pointer-events:none; transition: opacity 0.3s ease }
+.overlay.active { opacity:1; pointer-events:all }
+.modal-card { background: linear-gradient(135deg, var(--bg-panel), #1e293b); border:1px solid var(--border-color); border-radius:24px; padding:40px; width: min(90%,600px); text-align:center; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275) }
+.overlay.active .modal-card { transform: translateY(0) }
+.modal-card h2 { font-size:2.2rem; margin-bottom:20px; background: linear-gradient(135deg, var(--accent), white); background-clip: text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; display:flex; justify-content:center; align-items:center; gap:15px; line-height:1.3 }
+
+.rules-list { text-align:left; margin:20px auto 30px; max-width:520px; list-style-type:none; max-height: 50vh; overflow-y: auto; padding-right: 6px; }
+.rules-list li { margin-bottom:12px; position:relative; padding-left:25px; color:var(--muted); line-height: 1.5; }
+.rules-list li::before { content: "▹"; position:absolute; left:0; color:var(--accent); font-weight:bold }
+
+.quit-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+.quit-actions .btn-action { flex: 1; padding: 12px; font-size: 1rem; box-sizing: border-box; }
+.btn-quit-cancel { background: rgba(255, 255, 255, 0.1); color: var(--text); }
+.btn-quit-confirm { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+
+.stats-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:15px; margin:25px 0 }
+.stat-box { display:flex; flex-direction:column; align-items:center; background: var(--bg-card); border:1px solid var(--border-color); border-radius:16px; padding:15px }
+.stat-box .label { font-size:0.8rem; color:var(--muted); text-transform:uppercase; margin-bottom:4px }
+.stat-box .value { font-size:1.4rem; font-weight:700; color:var(--accent) }
+
+.level-banner { position: fixed; top:50%; left:50%; transform: translate(-50%,-50%) scale(0); padding:30px 60px; border-radius:30px; background: linear-gradient(135deg, var(--accent), var(--accent-3)); color:white; font-size:2.1rem; font-weight:900; text-transform:uppercase; letter-spacing:4px; box-shadow:0 20px 50px rgba(0,0,0,0.5); z-index:10000; opacity:0; pointer-events:none }
+.level-banner.show { animation: bannerPop 2s cubic-bezier(0.175,0.885,0.32,1.275) forwards }
+
+@keyframes bannerPop { 0% { transform: translate(-50%,-50%) scale(0); opacity:0 } 20% { transform: translate(-50%,-50%) scale(1.1); opacity:1 } 80% { transform: translate(-50%,-50%) scale(1); opacity:1 } 100% { transform: translate(-50%,-150%) scale(0.5); opacity:0 } }
+
+footer.site-footer { padding: 20px 32px; text-align: center; color: var(--muted); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    body { padding: 12px; }
+    .club-logo { width: 64px; height: 64px; }
+    .header-text h1 { font-size: clamp(1.6rem, 6vw, 2rem); }
+    .header-text p { font-size: 0.95rem; }
+    .game4-page { padding: 0 12px 20px; }
+    .game4-panel { padding: 14px; border-radius: 18px; }
+    .status-bar { gap: 10px; }
+    .status-value { font-size: 1.15rem; }
+    .bridge-board { height: 360px; margin-bottom: 28px; }
+    .board-ground { height: 64px; }
+    .seesaw-pivot { bottom: 64px; }
+    .seesaw-beam { bottom: 105px; }
+    .plank-slot { min-width: 30px; }
+    .material-icon, .material-icon-fallback { width: 24px; height: 24px; }
+    .chip-weight { font-size: 0.6rem; }
+    .game4-actions { gap: 10px; }
+    .btn-action { padding: 12px 8px; font-size: 0.9rem; }
+    .modal-card { padding: 22px; max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .modal-card h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
+    .level-banner { padding: 18px 30px; font-size: clamp(1.4rem, 8vw, 2.1rem); letter-spacing: 2px; width: min(90vw, 420px); text-align: center; }
+    .stats-grid { grid-template-columns: 1fr; gap: 10px; }
+}
+
+@media (max-width: 380px) {
+    .club-logo { width: 56px; height: 56px; }
+    .header-text h1 { font-size: 1.3rem; }
+    .club-slogan { font-size: 0.75rem; letter-spacing: 1px; }
+    .bridge-board { height: 300px; margin-bottom: 24px; }
+    .board-ground { height: 52px; }
+    .seesaw-pivot { bottom: 52px; }
+    .seesaw-beam { bottom: 93px; }
+    .plank-slot { min-width: 26px; }
+    .material-icon, .material-icon-fallback { width: 20px; height: 20px; }
+    .plank-mark { font-size: 0.55rem; }
+    .game4-actions { gap: 8px; }
+    .btn-action { font-size: 0.85rem; padding: 10px 6px; }
+    .status-item { min-width: 70px; }
+}
