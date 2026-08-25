@@ -1,29 +1,3 @@
-:root {
-    --bg-main: #020617;
-    --bg-panel: rgba(15, 23, 42, 0.95);
-    --bg-card: rgba(30, 41, 59, 0.8);
-    --border-color: rgba(56, 189, 248, 0.2);
-
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
-
-    --color-primary: #38bdf8;
-    --color-secondary: #818cf8;
-    --color-accent: #c084fc;
-
-    --color-success: #22c55e;
-    --color-error: #ef4444;
-    --color-warning: #f59e0b;
-
-    --color-easy: #10b981;
-    --color-medium: #3b82f6;
-    --color-hard: #f97316;
-    --color-superhard: #8b5cf6;
-
-    --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.3);
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -35,9 +9,6 @@ html {
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: radial-gradient(circle at top center, rgba(56, 189, 248, 0.15), transparent 40%),
-        linear-gradient(135deg, var(--bg-main), #0f172a);
     color: var(--text-primary);
     min-height: 100vh;
     display: flex;
@@ -78,7 +49,7 @@ body {
     height: 80px;
     border-radius: 50%;
     border: 2px solid var(--color-primary);
-    background: white;
+    background: transparent;
     object-fit: cover;
     box-shadow: var(--shadow-glow);
     animation: float 6s ease-in-out infinite;
@@ -235,26 +206,26 @@ body {
 .btn-game:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.3) }
 .btn-game:hover::after { opacity:1 }
 .btn-game:active { transform: translateY(1px) }
-.btn-number { background: linear-gradient(135deg, rgba(37,99,235,0.8), rgba(29,78,216,0.8)); border-color: var(--color-primary) }
+.btn-number { background: linear-gradient(135deg, rgba(0,240,255,0.55), rgba(157,78,255,0.55)); border-color: var(--color-primary) }
 .btn-number.used { opacity:0.3; pointer-events:none; transform: scale(0.95) }
-.btn-operator { background: linear-gradient(135deg, rgba(124,58,237,0.8), rgba(109,40,217,0.8)); border-color: var(--color-accent) }
+.btn-operator { background: linear-gradient(135deg, rgba(157,78,255,0.6), rgba(255,46,196,0.5)); border-color: var(--color-accent) }
 
 .actions-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin-bottom:20px }
-.btn-action { border:none; border-radius:12px; padding:15px; font-size:1.1rem; font-weight:700; color:white; cursor:pointer; transition: all 0.2s; text-transform:uppercase; letter-spacing:1px; text-decoration:none }
+.btn-action { border:none; border-radius:12px; padding:15px; min-height:44px; font-size:1.1rem; font-weight:700; color:white; cursor:pointer; transition: all 0.2s; text-transform:uppercase; letter-spacing:1px; text-decoration:none }
 .btn-action:hover { transform: translateY(-2px); box-shadow:0 8px 15px rgba(0,0,0,0.3); text-decoration:none }
 .btn-action:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
-.btn-delete { background: linear-gradient(135deg,#f59e0b,#d97706) }
-.btn-clear { background: linear-gradient(135deg,#ef4444,#dc2626) }
-.btn-hint { background: linear-gradient(135deg,#8b5cf6,#7c3aed) }
-.btn-submit { background: linear-gradient(135deg,#10b981,#059669) }
+.btn-delete { background: linear-gradient(135deg,var(--neon-amber),var(--neon-amber-2)) }
+.btn-clear { background: linear-gradient(135deg,var(--neon-red),var(--neon-red-2)) }
+.btn-hint { background: linear-gradient(135deg,var(--neon-purple),#7c3aed) }
+.btn-submit { background: linear-gradient(135deg,var(--neon-green),var(--neon-green-2)) }
 
 .feedback-msg { min-height:60px; border-radius:12px; padding:15px; text-align:center; font-size:1.1rem; font-weight:500; display:flex; align-items:center; justify-content:center; background: rgba(0, 0, 0, 0.2); border:1px solid rgba(255,255,255,0.05); transition: all 0.3s }
 .feedback-msg.success { background: rgba(16,185,129,0.1); color:var(--color-success); border-color: rgba(16,185,129,0.3) }
 .feedback-msg.error { background: rgba(239,68,68,0.1); color:var(--color-error); border-color: rgba(239,68,68,0.3) }
 
-.overlay { position: fixed; inset:0; background: rgba(2,6,23,0.85); backdrop-filter: blur(10px); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; pointer-events:none; transition: opacity 0.3s ease }
+.overlay { position: fixed; inset:0; background: rgba(5,1,15,0.85); backdrop-filter: blur(10px); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; pointer-events:none; transition: opacity 0.3s ease }
 .overlay.active { opacity:1; pointer-events:all }
-.modal-card { background: linear-gradient(135deg, var(--bg-panel), #1e293b); border:1px solid var(--border-color); border-radius:24px; padding:40px; width: min(90%,600px); text-align:center; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275) }
+.modal-card { background: linear-gradient(135deg, var(--bg-panel), #1b0f3d); border:1px solid var(--border-color); border-radius:24px; padding:40px; width: min(90%,600px); text-align:center; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275) }
 .overlay.active .modal-card { transform: translateY(0) }
 .modal-card h2 { font-size:2.5rem; margin-bottom:20px; background: linear-gradient(135deg, var(--color-primary), white); -webkit-background-clip:text; -webkit-text-fill-color:transparent; display:flex; justify-content:center; align-items:center; gap:15px; line-height:1.3 }
 

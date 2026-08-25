@@ -1,0 +1,239 @@
+/* =========================================================
+   ARCLIGHT THEME — shared retro-futuristic / synthwave tokens
+   Loaded BEFORE every page's own stylesheet on all 5 pages
+   (menu.html, game1-4.html) so color/font/background stay in
+   sync from one place. Page stylesheets keep their layout and
+   component rules — only the duplicated :root color tokens,
+   body background and body font-family move here.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+    /* --- Canonical ARCLIGHT palette --- */
+    --bg-void: #05010f;
+    --bg-surface: #0d0620;
+    --bg-surface-2: #140a2e;
+    --bg-surface-3: #1b0f3d;
+
+    --neon-cyan: #00f0ff;
+    --neon-magenta: #ff2ec4;
+    --neon-purple: #9d4eff;
+    --neon-yellow: #ffe14d;
+    --neon-green: #39ff9d;
+    --neon-green-2: #05d98a;
+    --neon-red: #ff2d55;
+    --neon-red-2: #c81e4a;
+    --neon-amber: #ffb020;
+    --neon-amber-2: #ff7a1a;
+
+    --border-glow: rgba(157, 78, 255, 0.35);
+    --border-glow-strong: rgba(157, 78, 255, 0.65);
+
+    --text-hi: #f4f2fb;
+    --text-mid: #bcb6db;
+    --text-low: #8b84ad;
+
+    --shadow-glow: 0 0 24px rgba(157, 78, 255, 0.45);
+
+    /* --- Legacy aliases: menu.css / game1.css naming scheme --- */
+    --bg-main: var(--bg-void);
+    --color-primary: var(--neon-cyan);
+    --color-secondary: var(--neon-purple);
+    --color-accent: var(--neon-magenta);
+    --text-primary: var(--text-hi);
+    --text-secondary: var(--text-mid);
+    --text-muted: var(--text-low);
+    --bg-panel: rgba(13, 6, 32, 0.92);
+    --bg-card: rgba(27, 15, 61, 0.7);
+    --border-color: var(--border-glow);
+    --color-success: var(--neon-green);
+    --color-error: var(--neon-red);
+    --color-warning: var(--neon-amber);
+    --color-easy: var(--neon-green);
+    --color-medium: var(--neon-cyan);
+    --color-hard: var(--neon-amber-2);
+    --color-superhard: var(--neon-magenta);
+
+    /* --- Legacy aliases: game2.css / game3.css / game4.css naming scheme --- */
+    --text: var(--text-hi);
+    --muted: var(--text-mid);
+    --accent: var(--neon-cyan);
+    --accent-2: var(--neon-purple);
+    --accent-3: var(--neon-magenta);
+    --success: var(--neon-green);
+    --danger: var(--neon-red);
+}
+
+/* --- Base --- */
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Rajdhani', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background:
+        radial-gradient(ellipse 900px 560px at 50% -8%, rgba(157, 78, 255, 0.32), transparent 62%),
+        radial-gradient(ellipse 720px 480px at 92% 105%, rgba(255, 46, 196, 0.16), transparent 60%),
+        radial-gradient(ellipse 640px 420px at -6% 92%, rgba(0, 240, 255, 0.12), transparent 60%),
+        var(--bg-void);
+    background-attachment: fixed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+::selection {
+    background: var(--neon-purple);
+    color: #fff;
+}
+
+:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* =========================================================
+   Ambient background FX — starfield + synthwave grid floor.
+   Pure CSS, no canvas/JS. position:fixed + negative z-index
+   keeps it behind all normal-flow page content (headers use
+   z-index:10, overlays use z-index:9999 — both stay above).
+   Animations use `transform` only (compositor-cheap, no
+   repaint) so it stays light on mid-range phones even while a
+   game timer is ticking. `prefers-reduced-motion` disables both.
+   ========================================================= */
+.bg-fx {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-fx__stars {
+    position: absolute;
+    inset: -25%;
+    width: 150%;
+    height: 150%;
+    background-image:
+        radial-gradient(1.4px 1.4px at 40px 60px, rgba(255, 255, 255, 0.85), transparent),
+        radial-gradient(1.4px 1.4px at 180px 240px, rgba(0, 240, 255, 0.75), transparent),
+        radial-gradient(1px 1px at 300px 120px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1.8px 1.8px at 420px 300px, rgba(157, 78, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 520px 40px, rgba(255, 255, 255, 0.55), transparent),
+        radial-gradient(1.4px 1.4px at 640px 200px, rgba(255, 46, 196, 0.65), transparent),
+        radial-gradient(1px 1px at 20px 340px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1.4px 1.4px at 740px 380px, rgba(255, 255, 255, 0.75), transparent);
+    background-repeat: repeat;
+    background-size: 380px 220px;
+    opacity: 0.55;
+    animation: bgStarDrift 140s linear infinite;
+    will-change: transform;
+}
+
+.bg-fx__grid {
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    bottom: 0;
+    height: 38%;
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 78, 255, 0.16) 1px, transparent 1px);
+    background-size: 56px 56px;
+    transform: perspective(320px) rotateX(76deg);
+    transform-origin: bottom center;
+    -webkit-mask-image: linear-gradient(to top, black 12%, transparent 88%);
+    mask-image: linear-gradient(to top, black 12%, transparent 88%);
+    opacity: 0.4;
+    animation: bgGridScroll 6s linear infinite;
+    will-change: transform;
+}
+
+@keyframes bgStarDrift {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-380px, -220px, 0); }
+}
+
+@keyframes bgGridScroll {
+    from { transform: perspective(320px) rotateX(76deg) translateY(0); }
+    to { transform: perspective(320px) rotateX(76deg) translateY(56px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-fx__stars, .bg-fx__grid { animation: none; }
+}
+
+/* =========================================================
+   Retro-futuristic heading treatment — Orbitron stays scoped
+   to titles/labels/buttons only. Gameplay digits (scores,
+   timers, sumplete/mathrix numbers, chip weights) stay on the
+   body font so they read clearly at a glance during play.
+   ========================================================= */
+.header-text h1,
+.club-slogan,
+.level-name,
+.modal-card h2,
+.level-banner,
+.card-body h3,
+.win-card h2,
+.btn-play,
+.btn-action,
+.btn-game {
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   Glowing hover / focus states — layered on top of whatever
+   box-shadow each page already defines via `filter`, so it
+   composes additively instead of fighting page-CSS specificity.
+   ========================================================= */
+.btn-play:hover,
+.btn-play:focus-visible,
+.btn-action:not(:disabled):hover,
+.btn-action:not(:disabled):focus-visible,
+.game-card:hover,
+.game-card:focus-within,
+.btn-game:hover,
+.btn-game:focus-visible,
+.sumplete-cell:hover,
+.sumplete-cell:focus-visible,
+.tray-item:not(.locked):hover,
+.plank-slot.slot-active:hover,
+.status-pill:hover {
+    filter: drop-shadow(0 0 10px var(--neon-purple)) drop-shadow(0 0 4px var(--neon-cyan));
+}
+
+/* Small orphan credit badge present on every game page — was
+   entirely unstyled before; giving it a minimal neon chip so it
+   doesn't render as bare white text over the new dark background. */
+.author-avatar {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 40;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: #fff;
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-magenta));
+    box-shadow: var(--shadow-glow);
+    opacity: 0.9;
+    pointer-events: none;
+}
+
