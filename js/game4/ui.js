@@ -74,9 +74,13 @@ const UI = {
             this.els.bridgeBoard.addEventListener('pointerdown', (e) => this.onContainerPointerDown(e));
             this.els.bridgeBoard.addEventListener('click', (e) => {
                 // A tap on a chip itself is a selection tap (handled by onChipPointerUp's
-                // !moved branch) — only an empty stretch of the slot completes a placement.
+                // !moved branch) — only an empty stretch near a slot completes a placement.
                 if (e.target.closest('.tray-item')) return;
-                const slot = e.target.closest('.plank-slot.slot-active');
+                // Route through the same "nearest slot within SNAP_RADIUS_PX" logic the
+                // drag path uses (findNearestSlot) instead of requiring a pixel-precise
+                // hit on the literal .plank-slot element (as small as ~20px tall) — keeps
+                // tap accuracy on par with drag accuracy, especially on phones.
+                const slot = this.findNearestSlot(e.clientX, e.clientY);
                 if (slot) this.handleSlotTap(Number(slot.dataset.distance));
             });
         }
