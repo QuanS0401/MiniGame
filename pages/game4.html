@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Mathrix - Game 4</title>
+    <link rel="icon" href="../images/LOGO STEM REMOVE BACKGROUND.png" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/game4.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="brand-container">
+            <img src="../images/LOGO STEM official.png" alt="Logo CLB STEM" class="club-logo">
+        </div>
+        <div class="header-text">
+            <div class="club-slogan">CLB STEM THPT Thủ Đức</div>
+            <h1>Game 4 - Cầu Cân Bằng</h1>
+            <p>Kéo vật liệu vào đúng vị trí để cây cầu cân bằng.</p>
+        </div>
+    </header>
+
+    <main class="game4-page">
+        <section class="game4-panel">
+
+            <div class="level-info-container">
+                <div class="level-name" id="levelName">Easy - Màn 1</div>
+                <div class="level-badge badge-easy" id="levelBadge">LEVEL: EASY</div>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">Điểm</span>
+                    <span class="status-value score" id="scoreValue">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Thời gian</span>
+                    <span class="status-value timer" id="timerValue">00:00</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Gợi ý đã dùng</span>
+                    <span class="status-value" id="hintValue">0</span>
+                </div>
+            </div>
+
+            <div id="bridgeBoard" class="bridge-board">
+                <div class="board-sky"></div>
+                <div class="board-ground" id="boardGround"></div>
+                <div class="seesaw-pivot" id="seesawPivot"></div>
+                <div class="seesaw-beam" id="seesawBeam"></div>
+                <div class="support-stick hidden" id="supportStick"></div>
+                <button class="btn-action btn-retry hidden" id="btnRetry" type="button">Thử lại</button>
+            </div>
+
+            <div class="tray-container">
+                <div class="tray-title">Kho vật liệu</div>
+                <div id="itemTray" class="item-tray"></div>
+            </div>
+
+            <div class="game4-actions">
+                <button class="btn-action btn-hint" id="btnHint">Gợi ý</button>
+                <button class="btn-action btn-confirm" id="btnConfirm">Xác nhận</button>
+            </div>
+
+            <button class="btn-action" id="btnQuit"
+                style="width: 100%; margin-top: 5px; background: rgba(255,255,255,0.05); color: #94a3b8; padding: 12px; font-size: 0.9rem;">Bỏ cuộc</button>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Phát triển bởi <span>CLB STEM THPT Thủ Đức</span>. Nâng cao tư duy - Kiến tạo tương lai.</p>
+    </footer>
+
+    <!-- Overlay Luật chơi -->
+    <div class="overlay" id="rulesOverlay">
+        <div class="modal-card rules-modal">
+            <h2>📖 LUẬT CHƠI</h2>
+            <ul class="rules-list">
+                <li>Cây cầu bập bênh có <strong>1 điểm tựa duy nhất ở giữa</strong>, với các <strong>mốc khoảng cách cố định</strong> hai bên giống vạch chia trên thước kẻ. Bên trái đã có sẵn vật liệu <strong>khóa cứng, không thể thay đổi</strong> — đó là đề bài của màn.</li>
+                <li>Bên phải là nơi bạn thao tác: <strong>kéo-thả</strong> vật liệu từ <strong>kho</strong> vào 1 mốc còn trống bên phải để đặt lên cầu; kéo vật đã đặt ra ngoài (hoặc thả vào khu vực kho) để lấy lại; kéo vật đã đặt sang mốc trống khác để đổi vị trí. Mỗi mốc chỉ chứa được <strong>1 vật</strong>.</li>
+                <li>Không kéo-thả được trên thiết bị của bạn? Có thể dùng cách <strong>chọn-rồi-đặt</strong>: chạm vào 1 vật để chọn (viền sáng lên), rồi chạm vào 1 mốc trống bên phải để đặt vào đúng mốc đó; chạm vào khu vực kho khi đang chọn 1 vật đã đặt để trả nó về kho.</li>
+                <li><strong>Kho có thể chứa vật liệu dư/gây nhiễu</strong> — không nhất thiết phải dùng hết mọi thứ trong kho, hãy tự tìm ra vật liệu nào cần dùng và đặt ở mốc nào.</li>
+                <li>Mỗi vật liệu có <strong>khối lượng</strong> riêng, còn lực nó tạo ra phụ thuộc vào <strong>mốc khoảng cách</strong> bạn đặt nó vào: đặt càng <strong>gần</strong> điểm tựa thì lực tạo ra càng <strong>nhẹ</strong>, đặt càng <strong>xa</strong> thì lực càng <strong>nặng</strong> — đúng theo nguyên lý đòn bẩy.</li>
+                <li>Trong lúc bạn đặt/gỡ vật liệu, một <strong>cây gậy đỡ</strong> giữ cầu <strong>nằm ngang cố định</strong> — cứ thoải mái thử các cách đặt khác nhau, cầu sẽ không tự nghiêng.</li>
+                <li>Khi đã sẵn sàng, bấm <strong>"Xác nhận"</strong>: cây gậy biến mất và cầu <strong>tự nghiêng theo đúng lực thật</strong> 2 bên. Nếu lực bên phải (momen phải) <strong>bằng chính xác tuyệt đối</strong> lực bên trái (momen trái) — không có sai số — cầu sẽ về ngang thẳng và <strong>sáng xanh</strong>; nếu chưa đúng, cầu sẽ đứng nghiêng để bạn thấy rõ.</li>
+                <li>Cân bằng đúng thì màn <strong>tự động hoàn thành</strong> và chuyển sang màn tiếp theo sau 0.5 giây.</li>
+                <li>Đặt sai (bấm "Xác nhận" mà cầu chưa cân bằng) sẽ bị <strong>trừ 50 điểm</strong> mỗi lần; vật liệu vẫn giữ nguyên vị trí để bạn tự chỉnh lại. Cầu sẽ đứng nghiêng để bạn thấy rõ, sau đó nút <strong>"Thử lại"</strong> hiện lên — bấm vào đó để gậy đỡ quay lại, cầu về ngang và bạn thử tiếp — <strong>không giới hạn số lần thử</strong>.</li>
+                <li>Trò chơi gồm <strong>6 màn</strong>, chia thành 3 cấp độ tăng dần: <strong>Easy, Medium, Hard</strong> (mỗi cấp 2 màn).</li>
+                <li>Mỗi màn có <strong>điểm gốc</strong>, <strong>thời gian chuẩn</strong> và <strong>số gợi ý tối đa để được điểm trọn vẹn</strong> riêng. Vượt quá thời gian chuẩn sẽ bị <strong>trừ 1 điểm mỗi giây</strong>.</li>
+                <li>Bấm <strong>"Gợi ý"</strong> để tự động đặt đúng vị trí cho 1 vật bất kỳ đang sai (có thể là đặt vào mốc đúng, hoặc trả về kho nếu đó là vật gây nhiễu). Có thể bấm gợi ý nhiều lần tùy ý, nhưng dùng càng nhiều gợi ý thì điểm màn càng giảm dần.</li>
+                <li>Nếu chọn <strong>"Bỏ cuộc"</strong>, trò chơi sẽ kết thúc và tiến trình hiện tại sẽ <strong>không được lưu</strong>.</li>
+            </ul>
+            <button class="btn-action btn-submit" id="btnConfirmRules" style="width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 12px; margin-top: 10px;">Tôi đã đọc và hiểu luật</button>
+        </div>
+    </div>
+
+    <!-- Custom Quit Confirm Modal -->
+    <div class="overlay" id="quitConfirmOverlay">
+        <div class="modal-card" style="max-width: 450px; padding: 30px;">
+            <h2 style="color: #f59e0b; font-size: 1.8rem; margin-bottom: 15px;">⚠️ BỎ CUỘC?</h2>
+            <p style="color: var(--muted); margin-bottom: 25px; font-size: 1rem; line-height: 1.5;">
+                Bạn có chắc muốn kết thúc trò chơi?<br>
+                Tiến trình hiện tại sẽ không được lưu.
+            </p>
+            <div class="quit-actions">
+                <button class="btn-action btn-quit-cancel" id="btnCancelQuit">Tiếp tục chơi</button>
+                <button class="btn-action btn-quit-confirm" id="btnConfirmQuit">Bỏ cuộc</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay Stats / Win -->
+    <div class="overlay" id="statsOverlay">
+        <div class="modal-card">
+            <h2 id="statsTitle">KẾT THÚC</h2>
+
+            <p id="statsMessage" style="color: var(--muted); margin-bottom: 10px;">
+                Bạn đã hoàn thành toàn bộ thử thách Cầu Cân Bằng!
+            </p>
+            <p id="top3Alert"
+                style="color: var(--success); font-weight: bold; font-size: 1.2rem; display: none; margin-bottom: 10px;">
+                🎉 Chúc mừng! Bạn đã hoàn thành trò chơi! 🎉</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="label">Số màn vượt qua</span>
+                    <span class="value" id="statLevels">0/6</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Tổng Điểm</span>
+                    <span class="value" style="color: #f59e0b" id="statScore">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Thời gian</span>
+                    <span class="value" id="statTime">00:00</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Gợi ý đã dùng</span>
+                    <span class="value" id="statHints">0</span>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:15px; justify-content:center;">
+                <a class="btn-action btn-submit" href="menu.html">Về Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Banner Transition -->
+    <div class="level-banner" id="levelBanner">LEVEL: EASY</div>
+
+    <!-- Personal Avatar -->
+    <div class="author-avatar">Sun</div>
+
+    <!-- Scripts -->
+    <script src="../js/game4/data.js"></script>
+    <script src="../js/game4/ui.js"></script>
+    <script src="../js/game4/game.js"></script>
+    <script src="../js/game4/app.js"></script>
+</body>
+
+</html>
