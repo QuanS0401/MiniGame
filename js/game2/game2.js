@@ -225,31 +225,31 @@ function renderBoard() {
             const hasBox = boxAt(x, y);
             const isPlayer = playerPosition.x === x && playerPosition.y === y;
 
-            let imageSrc = '../images/SPACE.png';
+            let imageSrc = '../images/game2/SPACE.png';
 
             if (tile === CELL_TYPES.WALL) {
                 cell.classList.add('wall');
-                imageSrc = '../images/WALL.png';
+                imageSrc = '../images/game2/WALL.png';
             } else if (hasBox && tile === CELL_TYPES.TARGET) {
                 cell.classList.add('box-on-target');
-                imageSrc = '../images/BOXfinished.png';
+                imageSrc = '../images/game2/BOXfinished.png';
             } else if (hasBox) {
                 cell.classList.add('box');
-                imageSrc = '../images/BOXunfinished%20.png';
+                imageSrc = '../images/game2/BOXunfinished%20.png';
             } else if (isPlayer) {
                 cell.classList.add('player');
                 cell.dataset.direction = playerDirection;
                 if (tile === CELL_TYPES.TARGET) {
                     cell.classList.add('target');
                     cell.classList.add('player-on-end');
-                    imageSrc = '../images/PLAYER ON END.png';
+                    imageSrc = '../images/game2/PLAYER ON END.png';
                 } else {
                     cell.classList.add('floor');
-                    imageSrc = '../images/PLAYER.png';
+                    imageSrc = '../images/game2/PLAYER.png';
                 }
             } else if (tile === CELL_TYPES.TARGET) {
                 cell.classList.add('target');
-                imageSrc = '../images/END.png';
+                imageSrc = '../images/game2/END.png';
             } else {
                 cell.classList.add('floor');
             }
