@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STEM Mathrix - Game 2</title>
-    <link rel="icon" href="../images/LOGO STEM REMOVE BACKGROUND.png" type="image/svg+xml">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/LOGO STEM official.png" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/game2.css">
 </head>
 <body>
+    <div class="bg-fx" aria-hidden="true">
+        <div class="bg-fx__stars"></div>
+        <div class="bg-fx__grid"></div>
+    </div>
     <header class="site-header">
         <div class="brand-container">
             <img src="../images/LOGO STEM official.png" alt="Logo CLB STEM" class="club-logo">
@@ -16,7 +21,7 @@
         <div class="header-text">
             <div class="club-slogan">CLB STEM THPT Thủ Đức</div>
             <h1>Game 2 - Sokoban</h1>
-            <p>Đẩy thùng vào vị trí đích bằng các phím W/A/S/D hoặc các phím mũi tên.</p>
+            <p>Đẩy thùng vào vị trí đích bằng các phím W/A/S/D hoặc các phím mũi tên (trên điện thoại: vuốt màn hình).</p>
         </div>
     </header>
 
@@ -53,7 +58,7 @@
 
         <div class="overlay" id="quitConfirmOverlay">
             <div class="modal-card quit-card" style="max-width: 450px; padding: 30px;">
-                <h2 style="color: #f59e0b; font-size: 1.8rem; margin-bottom: 15px; background: none; -webkit-text-fill-color: initial;">⚠️ BỎ CUỘC?</h2>
+                <h2 style="color: var(--neon-amber); font-size: 1.8rem; margin-bottom: 15px; background: none; -webkit-text-fill-color: initial;">⚠️ BỎ CUỘC?</h2>
                 <p style="color: var(--muted); margin-bottom: 25px; font-size: 1rem; line-height: 1.5;">
                     Bạn có chắc muốn kết thúc trò chơi?<br>
                     Tiến trình hiện tại sẽ không được lưu.
@@ -109,7 +114,7 @@
                 </div>
                 <div class="stat-box">
                     <span class="label">Tổng Điểm</span>
-                    <span class="value" style="color: #f59e0b" id="statScore">0</span>
+                    <span class="value" style="color: var(--neon-amber)" id="statScore">0</span>
                 </div>
             </div>
 
@@ -122,6 +127,5 @@
     <!-- Personal Avatar -->
     <div class="author-avatar">Sun</div>
 
-    <script src="../js/game2/game2.js"></script>
-</body>
+    <script src="../js/game2/game2.js"></script></body>
 </html>

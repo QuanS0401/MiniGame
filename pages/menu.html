@@ -1,78 +1,310 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STEM Mini Game - Menu</title>
-    <link rel="icon" href="../images/LOGO STEM REMOVE BACKGROUND.png" type="image/svg+xml">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/menu.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STEM Mini Game - Menu</title>
+<meta name="description" content="STEM Mini Game - Nền tảng trò chơi của CLB STEM THPT Thủ Đức, giúp rèn luyện tư duy logic, toán học và lập trình.">
+<link rel="icon" href="../images/LOGO STEM official.png" type="image/svg+xml">
+<link rel="stylesheet" href="../css/menu.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="brand-container">
-            <img src="../images/LOGO STEM official.png" alt="Logo CLB STEM" class="club-logo">
+<a class="skip-link" href="#main">Skip to main content</a>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- ========================= NAVBAR ========================= -->
+<header class="navbar" id="navbar">
+  <div class="container navbar-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">
+        <img src="../images/LOGO STEM official.png" alt="Logo CLB STEM">
+      </span>
+      <span class="brand-name">STEM<span>MiniGame</span></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#games">Games</a>
+      <a href="#community">Community</a>
+    </nav>
+
+    <div class="navbar-actions">
+      <a class="btn btn-primary btn-sm" href="https://www.facebook.com/profile.php?id=61582505532666" data-desktop-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+        Fanpage
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========================= HERO ========================= -->
+  <section class="hero" id="top">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-grid-floor" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span> Mini · Game</span>
+        <h1 class="hero-title">CLB <span class="grad">STEM</span> THPT Thủ Đức</h1>
+        <p class="hero-sub">Khám phá các trò chơi STEM giúp rèn luyện tư duy logic, toán học và lập trình.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#games">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg>
+            Chơi ngay
+          </a>
         </div>
-        <div class="header-text">
-            <div class="club-slogan">CLB STEM THPT Thủ Đức</div>
-            <h1>STEM Mini Game</h1>
-            <p>Khám phá các trò chơi STEM giúp rèn luyện tư duy logic, toán học và lập trình.</p>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="num" data-count="3" data-suffix="+">0</span>
+            <span class="label">Games Live</span>
+          </div>
+          <div class="hero-stat">
+            <span class="num" data-static="4.9">4.9★</span>
+            <span class="label">Avg. Rating</span>
+          </div>
         </div>
-    </header>
+      </div>
 
-    <main class="game-container">
-        <section class="card-list">
-            <article class="game-card">
-                <div class="card-left">🎮</div>
-                <div class="card-body">
-                    <h3>Mathrix</h3>
-                    <p>Luyện tư duy toán học với 4 số</p>
-                </div>
-                <div class="card-action">
-                    <a class="btn-play" href="game1.html">Chơi</a>
-                </div>
-            </article>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="atom-core">
+          <div class="atom-wobble">
+            <div class="atom-orbit o3"><div class="orbit-ring"></div><div class="electron-spin"><div class="electron"></div></div></div>
+            <div class="atom-orbit o2"><div class="orbit-ring"></div><div class="electron-spin"><div class="electron"></div></div></div>
+            <div class="atom-orbit o1"><div class="orbit-ring"></div><div class="electron-spin"><div class="electron"></div></div></div>
+          </div>
+          <div class="atom-nucleus"></div>
+        </div>
+        <div class="floating-chip c1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5.5L4.5 18a1.8 1.8 0 0 0 1.6 2.7h11.8a1.8 1.8 0 0 0 1.6-2.7L14 8.5V3"/><path d="M7.5 15h9"/></svg> Khoa Học</div>
+        <div class="floating-chip c2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4H6l6 8-6 8h12"/></svg> Toán học</div>
+        <div class="floating-chip c3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg> Công nghệ</div>
+        <div class="floating-chip c4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a4 4 0 0 1-4.9 4.9L8.7 18.3a2.1 2.1 0 0 1-3-3L12.9 8a4 4 0 0 1 4.9-4.9l-3.1 3.1z"/></svg> Kỹ thuật</div>
+      </div>
+    </div>
+  </section>
 
-            <article class="game-card">
-                <div class="card-left">🎮</div>
-                <div class="card-body">
-                    <h3>Sokoban</h3>
-                    <p>Chơi Sokoban - đẩy thùng về đích</p>
-                </div>
-                <div class="card-action">
-                    <a class="btn-play" href="game2.html">Chơi</a>
-                </div>
-            </article>
+  <!-- ========================= GAME SHOWCASE ========================= -->
+  <section class="section" id="games">
+    <div class="container">
+      <div class="carousel-header reveal">
+        <div class="section-head" style="margin-bottom:0;">
+          <span class="section-tag">Danh sách game</span>
+          <h2 class="section-title">Game "HOT" của CLB STEM THPT Thủ Đức</h2>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="carouselAutoplay" type="button" aria-pressed="true" aria-label="Pause auto-scroll">
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            <svg class="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg>
+          </button>
+          <button class="carousel-btn" id="carouselPrev" type="button" aria-label="Previous games">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel-btn" id="carouselNext" type="button" aria-label="Next games">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
 
-            <article class="game-card">
-                <div class="card-left">🎮</div>
-                <div class="card-body">
-                    <h3>Sumplete</h3>
-                    <p>Xóa đúng số để khớp tổng mỗi hàng, mỗi cột</p>
-                </div>
-                <div class="card-action">
-                    <a class="btn-play" href="game3.html">Chơi</a>
-                </div>
-            </article>
+      <div class="carousel-viewport" id="carouselViewport" role="region" aria-roledescription="carousel" aria-label="Featured games">
+        <ul class="carousel-track" id="carouselTrack">
 
-            <article class="game-card">
-                <div class="card-left">🎮</div>
-                <div class="card-body">
-                    <h3>Cầu Cân Bằng</h3>
-                    <p>Kéo vật liệu để cây cầu cân bằng</p>
-                </div>
-                <div class="card-action">
-                    <a class="btn-play" href="game4.html">Chơi</a>
-                </div>
-            </article>
-        </section>
-    </main>
+          <li class="game-card reveal">
+            <a class="game-cover" href="game1.html" aria-label="Chơi Mathrix" style="background:linear-gradient(160deg,#0f2a3d,#160a30);">
+              <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+              <span class="game-genre">Toán tư duy</span>
+              <div class="game-cover-content">
+                <h3>Mathrix</h3>
+              </div>
+              <div class="game-play-overlay"><span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg></span></div>
+            </a>
+            <div class="game-card-footer"><span>Độ khó</span><span>Trung bình</span></div>
+          </li>
 
-    <footer class="site-footer">
-        <p>Phát triển bởi <span>CLB STEM THPT Thủ Đức</span>. Nâng cao tư duy - Kiến tạo tương lai.</p>
-    </footer>
+          <li class="game-card reveal">
+            <a class="game-cover" href="game2.html" aria-label="Chơi Sokoban" style="background:linear-gradient(160deg,#0f3d33,#0a1030);">
+              <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>
+              <span class="game-genre">Giải đố kéo đẩy</span>
+              <div class="game-cover-content">
+                <h3>Sokoban</h3>
+              </div>
+              <div class="game-play-overlay"><span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg></span></div>
+            </a>
+            <div class="game-card-footer"><span>Độ khó</span><span>Trung bình</span></div>
+          </li>
 
-</body>
+          <li class="game-card reveal">
+            <a class="game-cover" href="game3.html" aria-label="Chơi Sumplete" style="background:linear-gradient(160deg,#3d0f36,#160a30);">
+              <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+              <span class="game-genre">Toán logic</span>
+              <div class="game-cover-content">
+                <h3>Sumplete</h3>
+              </div>
+              <div class="game-play-overlay"><span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg></span></div>
+            </a>
+            <div class="game-card-footer"><span>Độ khó</span><span>Khó</span></div>
+          </li>
 
+          <li class="game-card reveal">
+            <a class="game-cover" href="game4.html" aria-label="Chơi Cầu Cân Bằng" style="background:linear-gradient(160deg,#0f1c3d,#0a1030);">
+              <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2v20M5 6h14M5 6 2 12a3 3 0 0 0 6 0L5 6zM19 6l-3 6a3 3 0 0 0 6 0l-3-6z"/></svg>
+              <span class="game-genre">Vật lý đòn bẩy</span>
+              <div class="game-cover-content">
+                <h3>A Balancing Act</h3>
+              </div>
+              <div class="game-play-overlay"><span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg></span></div>
+            </a>
+            <div class="game-card-footer"><span>Độ khó</span><span>Dễ</span></div>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Game slide navigation"></div>
+      <p class="carousel-status" id="carouselStatus" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ========================= COMMUNITY ========================= -->
+  <section class="section" id="community">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="section-tag">Community</span>
+        <h2 class="section-title">Tham gia ngay CLB STEM THPT Thủ Đức</h2>
+        <p class="section-desc">🔬 CLB STEM THPT Thủ Đức – Nơi kết nối đam mê💡</p>
+      </div>
+
+      <!-- TODO: thay các đường link/placeholder bên dưới bằng thông tin liên hệ thật -->
+      <div class="community-social">
+        <a href="https://www.facebook.com/profile.php?id=61582505532666" aria-label="Fanpage CLB STEM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+        </a>
+        <a class="contact-pill" href="tel:+84988178237" aria-label="Số điện thoại liên hệ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="contact-pill-text">090 927 00 65</span>
+        </a>
+        <a class="contact-pill" href="mailto:PLACEHOLDER@gmail.com" aria-label="Email liên hệ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span class="contact-pill-text">quangchausp@gmail.com</span>
+        </a>
+      </div>
+
+      <!-- TODO: placeholder — thay bằng tên hoạt động, nhãn phân loại, mô tả, ngày và ảnh thật -->
+      <div class="activities-grid">
+        <div class="activity-card reveal">
+          <div class="activity-photo" style="background:linear-gradient(160deg,#0f2a3d,#160a30);">
+            <img src="../images/menu/WORKSHOP.png" alt="Lập trình cơ bản" loading="lazy" onerror="this.style.display='none'">
+            <span class="activity-badge">Workshop</span>
+          </div>
+          <div class="activity-body">
+            <h3 class="activity-title">Ứng dụng công nghệ AI và thiết kế vi mạch</h3>
+            <p class="activity-desc">Buổi workshop giới thiệu về ứng dụng AI trong đời sống và giáo dục và thiết kế vi mạch ở mức độ cơ bản.</p>
+            <div class="activity-meta">
+              <span class="activity-date">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                7/12/2025
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="activity-card reveal">
+          <div class="activity-photo" style="background:linear-gradient(160deg,#3d0f36,#160a30);">
+            <img src="../images/menu/COMPETITION.png" alt="Robotics Challenge" loading="lazy" onerror="this.style.display='none'">
+            <span class="activity-badge">Cuộc thi</span>
+          </div>
+          <div class="activity-body">
+            <h3 class="activity-title">Mạch điện sáng tạo</h3>
+            <p class="activity-desc">Cuộc thi do tổ Vật Lý - Kĩ thuật công nghệ tại Trường THPT Thủ Đức tổ chức</p>
+            <div class="activity-meta">
+              <span class="activity-date">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                07/03/2026
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="activity-card reveal">
+          <div class="activity-photo" style="background:linear-gradient(160deg,#0f3d33,#0a1030);">
+            <img src="../images/menu/EVENT.png" alt="Trại hè STEM" loading="lazy" onerror="this.style.display='none'">
+            <span class="activity-badge">Sự kiện</span>
+          </div>
+          <div class="activity-body">
+            <h3 class="activity-title">Ngày hội Trải nghiệm Khoa học Euréka</h3>
+            <p class="activity-desc">Thử sức với các hoạt động như: nghiên cứu về halogen, tư duy toán học, hình học đa chiều; sudoku giải tích,...</p>
+            <div class="activity-meta">
+              <span class="activity-date">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                05/06/2026
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <span class="brand-mark"><img src="../images/LOGO STEM official.png" alt="Logo CLB STEM"></span>
+          <span class="brand-name">STEM<span>MiniGame</span></span>
+        </a>
+        <p>✨ STEM – Khơi nguồn sáng tạo, kết nối đam mê, chinh phục tương lai! ✨</p>
+        <!-- TODO: thay các đường link/placeholder bên dưới bằng thông tin liên hệ thật -->
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61582505532666" aria-label="Fanpage CLB STEM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+          </a>
+          <a class="contact-pill" href="tel:090 927 00 65" aria-label="Số điện thoại liên hệ">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="contact-pill-text"> 090 927 00 65</span>
+          </a>
+          <a class="contact-pill" href="mailto:PLACEHOLDER@gmail.com" aria-label="Email liên hệ">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span class="contact-pill-text">quangchausp@gmail.com</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#community   ">Community</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        
+      </div>
+      <div class="footer-col">
+        <h4>Stay Updated</h4>
+        <p style="color:var(--text-secondary);font-size:var(--fs-sm);margin-bottom:var(--space-3);">Hãy theo dõi fanpage của CLB STEM THPT Thủ Đức để xem được những hoạt động mới nhất của tụi mình nhé</p>
+        <a class="btn btn-primary btn-sm" href="https://www.facebook.com/profile.php?id=61582505532666" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+          Fanpage
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> CLB STEM THPT Thủ Đức. Website created by Sun. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="../js/menu.js"></script></body>
 </html>
