@@ -92,27 +92,27 @@ function validateLevelDesign(level, index) {
     const size = values.length;
 
     for (let i = 0; i < size; i++) {
-        const hasDeleted = solution[i].some(v => v === true);
-        const hasKept = solution[i].some(v => v === false);
-        if (!hasDeleted || !hasKept) console.warn(`Game3 LEVELS[${index}]: hàng ${i} thiếu ô xóa hoặc ô giữ.`);
+        const hasKept = solution[i].some(v => v === true);
+        const hasXoa = solution[i].some(v => v === false);
+        if (!hasKept || !hasXoa) console.warn(`Game3 LEVELS[${index}]: hàng ${i} thiếu ô xóa hoặc ô giữ.`);
     }
     for (let j = 0; j < size; j++) {
         const col = solution.map(row => row[j]);
-        const hasDeleted = col.some(v => v === true);
-        const hasKept = col.some(v => v === false);
-        if (!hasDeleted || !hasKept) console.warn(`Game3 LEVELS[${index}]: cột ${j} thiếu ô xóa hoặc ô giữ.`);
+        const hasKept = col.some(v => v === true);
+        const hasXoa = col.some(v => v === false);
+        if (!hasKept || !hasXoa) console.warn(`Game3 LEVELS[${index}]: cột ${j} thiếu ô xóa hoặc ô giữ.`);
     }
 
     // rowTargets/colTargets are hand-typed above; only warn on mismatch, never auto-fix.
     for (let i = 0; i < size; i++) {
-        const actual = values[i].reduce((sum, v, j) => sum + (solution[i][j] ? 0 : v), 0);
+        const actual = values[i].reduce((sum, v, j) => sum + (solution[i][j] ? v : 0), 0);
         if (actual !== rowTargets[i]) {
             console.warn(`Game3 LEVELS[${index}]: rowTargets[${i}] gõ tay là ${rowTargets[i]} nhưng tính từ values+solution ra ${actual}.`);
         }
     }
     for (let j = 0; j < size; j++) {
         let actual = 0;
-        for (let i = 0; i < size; i++) if (!solution[i][j]) actual += values[i][j];
+        for (let i = 0; i < size; i++) if (solution[i][j]) actual += values[i][j];
         if (actual !== colTargets[j]) {
             console.warn(`Game3 LEVELS[${index}]: colTargets[${j}] gõ tay là ${colTargets[j]} nhưng tính từ values+solution ra ${actual}.`);
         }
