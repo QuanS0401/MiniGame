@@ -365,24 +365,58 @@
   /* =========================================================
      Expanding phone/email contact pills — desktop gets the
      expand-on-hover for free from CSS (:hover/:focus-visible).
-     Touch devices have no :hover, so the first tap expands the
-     pill instead of navigating; a second tap (now expanded)
-     follows the tel:/mailto: link normally. Tapping elsewhere
-     collapses any open pill.
+     Touch devices have no :hover, so a tap expands the pill too.
+     Clicking a pill (any device) copies its value to the
+     clipboard and shows a brief "Đã sao chép" confirmation.
+     Tapping elsewhere collapses any open pill.
      ========================================================= */
   function initContactPills() {
     const pills = document.querySelectorAll('.contact-pill');
     if (!pills.length) return;
-    if (!window.matchMedia('(hover: none)').matches) return;
 
     pills.forEach((pill) => {
-      pill.addEventListener('click', (e) => {
-        if (!pill.classList.contains('is-expanded')) {
-          e.preventDefault();
-          pills.forEach((p) => { if (p !== pill) p.classList.remove('is-expanded'); });
-          pill.classList.add('is-expanded');
+      const textEl = pill.querySelector('.contact-pill-text');
+      const value = pill.dataset.copyValue;
+      const label = pill.dataset.copyLabel || 'Nội dung';
+      const originalText = textEl ? textEl.textContent : '';
+      const originalAriaLabel = pill.getAttribute('aria-label');
+      let revertTimer = null;
+
+      async function copyValue() {
+        if (!value) return;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(value);
+          } else {
+            // Fallback cho trình duyệt cũ / trang không chạy qua HTTPS
+            // (navigator.clipboard.writeText cần secure context).
+            const tmp = document.createElement('textarea');
+            tmp.value = value;
+            tmp.style.position = 'fixed';
+            tmp.style.opacity = '0';
+            document.body.appendChild(tmp);
+            tmp.select();
+            document.execCommand('copy');
+            document.body.removeChild(tmp);
+          }
+        } catch (err) {
+          return; // copy thất bại (vd trình duyệt chặn) — im lặng, không hiện "Đã sao chép"
         }
-      });
+
+        pills.forEach((p) => { if (p !== pill) p.classList.remove('is-expanded'); });
+        pill.classList.add('is-expanded', 'is-copied');
+        if (textEl) textEl.textContent = `Đã sao chép ${label}!`;
+        pill.setAttribute('aria-label', `Đã sao chép ${label}: ${value}`);
+
+        clearTimeout(revertTimer);
+        revertTimer = setTimeout(() => {
+          pill.classList.remove('is-copied');
+          if (textEl) textEl.textContent = originalText;
+          pill.setAttribute('aria-label', originalAriaLabel);
+        }, 1600);
+      }
+
+      pill.addEventListener('click', copyValue);
     });
 
     document.addEventListener('click', (e) => {
