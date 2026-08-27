@@ -49,7 +49,7 @@ const LEVELS = [
         difficulty: 'Easy',
         baseScore: 100,
         parTime: 60,
-        hintLimit: 2,
+        hintLimit: 1,
 
         plankDistances: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
 
@@ -58,10 +58,11 @@ const LEVELS = [
         ],
 
         rightPool: [
+            { type: 4, weight: 17 },
             { type: 3, weight: 40 }
         ],
 
-        rightSolution: [0.75]
+        rightSolution: [null, 0.75]
     },
 
     // EASY 2 — placeholder, tính tay để đảm bảo có nghiệm; Sun tự chỉnh số liệu sau khi có ảnh vật liệu thật.
@@ -73,7 +74,7 @@ const LEVELS = [
         difficulty: 'Easy',
         baseScore: 100,
         parTime: 70,
-        hintLimit: 2,
+        hintLimit: 1,
 
         plankDistances: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
 
@@ -82,10 +83,11 @@ const LEVELS = [
         ],
 
         rightPool: [
-            { type: 1, weight: 10 }
+            { type: 1, weight: 10 },
+            { type: 5, weight: 3 },
         ],
 
-        rightSolution: [0.5]
+        rightSolution: [0.5, null]
     },
 
     // MEDIUM 1 — placeholder, tính tay; Sun tự chỉnh số liệu sau khi có ảnh vật liệu thật.
@@ -98,7 +100,7 @@ const LEVELS = [
         difficulty: 'Medium',
         baseScore: 200,
         parTime: 90,
-        hintLimit: 3,
+        hintLimit: 1,
 
         plankDistances: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
 
@@ -107,10 +109,13 @@ const LEVELS = [
         ],
 
         rightPool: [
-            { type: 0, weight: 5}
+            { type: 0, weight: 5},
+            { type: 6, weight: 50},
+            { type: 5, weight: 15}
+
         ],
 
-        rightSolution: [2]
+        rightSolution: [2, null, null]
     },
 
     // MEDIUM 2 — placeholder, tính tay; Sun tự chỉnh số liệu sau khi có ảnh vật liệu thật.
@@ -123,7 +128,7 @@ const LEVELS = [
         difficulty: 'Medium',
         baseScore: 200,
         parTime: 100,
-        hintLimit: 3,
+        hintLimit: 1,
 
         plankDistances: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
 
@@ -132,10 +137,13 @@ const LEVELS = [
         ],
 
         rightPool: [
+            
+            { type: 6, weight: 20 },
+            { type: 7, weight: 3 },
             { type: 5, weight: 10 }
         ],
 
-        rightSolution: [0.75]
+        rightSolution: [null, null, 0.75]
     },
 
     // HARD 1 — placeholder, tính tay; Sun tự chỉnh số liệu sau khi có ảnh vật liệu thật.
@@ -148,7 +156,7 @@ const LEVELS = [
         difficulty: 'Hard',
         baseScore: 300,
         parTime: 120,
-        hintLimit: 3,
+        hintLimit: 1,
 
         plankDistances: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
 
@@ -158,10 +166,13 @@ const LEVELS = [
         ],
 
         rightPool: [
-            { type: 4, weight: 20 }
+            { type: 0, weight: 5 },
+            { type: 4, weight: 20 },
+            { type: 5, weight: 10 },
+            { type: 7, weight: 25 }
         ],
 
-        rightSolution: [2]
+        rightSolution: [null, 2, null, null, null]
     },
 
     // HARD 2 — placeholder, tính tay; Sun tự chỉnh số liệu sau khi có ảnh vật liệu thật.
@@ -187,10 +198,12 @@ const LEVELS = [
             { type: 4, weight: 10 },
             { type: 5, weight: 10 },
             { type: 7, weight: 10 },
-            { type: 1, weight: 10 }
+            { type: 6, weight: 80 },
+            { type: 3, weight: 45 },
+            { type: 4, weight: 10 }
         ],
 
-        rightSolution: [0.25, 0.75, 1, 2]
+        rightSolution: [0.25, 0.75, 1, null, null, 2]
     }
 ];
 
