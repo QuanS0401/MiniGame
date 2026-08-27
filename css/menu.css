@@ -1002,6 +1002,18 @@ h1, h2, h3, h4 {
   opacity: 1;
 }
 
+/* Trạng thái xác nhận "đã copy" — đè màu sang xanh lá (--neon-green, giống màu
+   thành công dùng ở newsletter) trong lúc contact-pill-text tạm hiện "Đã sao chép...".
+   is-copied luôn đi kèm is-expanded (xem initContactPills() trong menu.js) nên không
+   cần lo phần max-width/opacity của .contact-pill-text — rule is-expanded ở trên đã lo. */
+.contact-pill.is-copied {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+.contact-pill.is-copied .contact-pill-text {
+  color: var(--neon-green);
+}
+
 /* =========================================================
    Community activity showcase — photo-card grid of 3 club
    activities (workshop/contest/event), badge overlay top-left.
